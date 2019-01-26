@@ -8,6 +8,8 @@ import { GameComponent } from './components/game/game.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SpriteComponent } from './components/sprite/sprite.component';
 
+import { Interfaces } from './services/interface.service';
+
 
 @NgModule({
   declarations: [
@@ -20,7 +22,11 @@ import { SpriteComponent } from './components/sprite/sprite.component';
   imports: [
     BrowserModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    Interfaces
+  ],
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }

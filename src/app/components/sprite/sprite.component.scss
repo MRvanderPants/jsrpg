@@ -1,7 +1,15 @@
 .sprite {
-    background-image: url('/assets/player/spr_fencer_idle_strip6.png');
     background-size: auto 100%;
     display: block;
     height: 96px;
     width: 96px;
+}
+
+.mirrored {
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
 }

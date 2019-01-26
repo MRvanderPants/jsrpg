@@ -1,6 +1,8 @@
 <section class="game">
-  <app-sprite
-    [url]="'/assets/player/spr_fencer_idle_strip6.png'"
-    [ratio]="120">
-  </app-sprite>
+
+  <div class="game__wrapper">
+    <app-sprite [animation]="testPlayer"></app-sprite>
+    <app-sprite [animation]="testEnemy"></app-sprite>
+  </div>
+  
 </section>

@@ -1,6 +1,33 @@
 .game {
 
-    background-color: #efefef;
+    align-items: flex-end;
+    background: #efefef url('/assets/background.png');
+    background-position: center bottom;
+    display: flex;
     height: 20vh;
+    justify-content: center;
+    position: relative;
     width: 100%;
+
+    .game__wrapper {
+
+        align-items: flex-end;
+        display: flex;
+        height: 80%;
+        justify-content: center;
+        margin-bottom: 0.5rem;
+        width: 80%;
+    }
+}
+
+.game:after {
+
+    background-color: #ffffff;
+    bottom: 0;
+    content: '';
+    height: 0.25rem;
+    right: 10vw;
+    position: absolute;
+    width: calc(100% - 10vw);
+    z-index: 100;
 }

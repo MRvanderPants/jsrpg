@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SpriteAnimation } from '../../services/interface.service';
 
 @Component({
   selector: 'app-game',
@@ -7,7 +8,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GameComponent implements OnInit {
 
-  constructor() { }
+  public testPlayer: SpriteAnimation;
+  public testEnemy: SpriteAnimation;
+
+  constructor() {
+
+    this.testPlayer = {
+      url: '/assets/player/spr_fencer_idle_strip6.png',
+      width: 120,
+      speed: 160,
+      mirror: false
+    };
+
+    this.testEnemy = {
+      url: '/assets/player/spr_fencer_idle_strip6.png',
+      width: 120,
+      speed: 160,
+      mirror: true
+    };
+  }
 
   ngOnInit() {
   }
