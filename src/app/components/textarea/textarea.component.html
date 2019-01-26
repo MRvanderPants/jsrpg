@@ -1,0 +1,11 @@
+<div class="textarea__wrapper">
+  <textarea #area
+    class="textarea"
+    (change)="submit()">
+console.log('test');
+</textarea>
+
+  <div class="textarea__submit" (click)="submit()" [class.disabled]="disabled">
+    <i class="material-icons textarea__submit__icon">play_arrow</i>
+  </div>
+</div>

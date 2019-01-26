@@ -1,0 +1,85 @@
+.textarea__wrapper {
+
+    position: relative;
+
+    .textarea {
+        
+        background-image: linear-gradient(#2d2d2d 50%, #303030 50%);
+        background-size: 100% 3rem; // 2.1rem
+        background-attachment: local;
+        border: none;
+        border-bottom: 0.25rem solid #9d9dff;
+        border-top: 0.5rem solid #9D9DFF;
+        color: #efefef;
+        font-family: 'Source Code Pro', monospace;
+        height: 20rem;
+        line-height: 1.5rem;
+        padding: 1.5rem 1rem 1rem 1rem;
+        resize: none;
+        tab-size: 4;
+        width: 100%;
+    }
+
+    .textarea__submit {
+
+        align-items: center;
+        background-color: #9D9DFF;
+        bottom: 0.5rem;
+        color: #efefef;
+        clip-path: polygon(1rem 0, 100% 0, 100% 100%, 0 100%);
+        display: flex;
+        height: 1.5rem;
+        justify-content: center;
+        position: absolute;
+        right: 0;
+        transition: all 0.2s;
+        width: 20%;
+    }
+
+    .textarea__submit:hover {
+        background-color: #efefef;
+        color: #2d2d2d;
+        cursor: pointer;
+    }
+
+    .disabled {
+        background-color: #adadad;
+        color: #efefef;
+    }
+
+    .disabled:hover {
+        background-color: #adadad;
+        color: #efefef;
+    }
+}
+
+.textarea__wrapper::after {
+
+    align-items: center;
+    background-color: #9D9DFF;
+    content: 'Javascript';
+    color: #efefef;
+    display: flex;
+    font-family: 'Open Sans', sans-serif;
+    height: 1rem;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.textarea__wrapper::before {
+    
+    background-color: #9D9DFF;
+    clip-path: polygon(0 0, 2rem 0, 0 2rem);
+    content: '';
+    color: #efefef;
+    font-family: 'Open Sans', sans-serif;
+    height: 2rem;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 2rem;
+    z-index: 1;
+}
