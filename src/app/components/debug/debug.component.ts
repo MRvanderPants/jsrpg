@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-debug',
@@ -9,10 +9,17 @@ export class DebugComponent implements OnInit {
 
   @Input() logs: Array<string>;
 
-  constructor() { }
+  @Output() clear: EventEmitter<void>;
+
+  constructor() {
+    this.clear = new EventEmitter();
+  }
 
   ngOnInit() {
     
   }
 
+  private onClear (): void {
+    this.clear.emit();
+  }
 }

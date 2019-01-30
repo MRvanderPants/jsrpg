@@ -24,8 +24,7 @@ export class TextareaComponent implements OnInit {
     this.disabled = false;
 
     this.areaDOM = this.area.nativeElement;
-    this.areaDOM.innerHTML = `debug.log(player, debug);`;
-    this.areaDOM.addEventListener('input', () => { this.submit(); }, false);
+    this.areaDOM.innerHTML = `debug.log(player.getStats());`;
 
     this.fixTabs();
   }
