@@ -1,10 +1,10 @@
-.textarea__wrapper {
-
-    margin-bottom: -0.3rem;
+.debugger__wrapper {
+    
+    border-left: 0.25rem solid #9d9dff;
     position: relative;
     width: calc(100% - 0.25rem);
 
-    .textarea {
+    .debugger__content {
         
         background-image: linear-gradient(#2d2d2d 50%, #303030 50%);
         background-size: 100% 3rem; // 2.1rem
@@ -12,22 +12,20 @@
         border: none;
         border-bottom: 0.25rem solid #9d9dff;
         border-top: 0.5rem solid #9D9DFF;
-        border-right: 0.25rem solid #9d9dff;
         color: #efefef;
         font-family: 'Source Code Pro', monospace;
+        font-size: 0.833rem;
         height: 20rem;
         line-height: 1.5rem;
         padding: 1.5rem 1rem 1rem 1rem;
-        resize: none;
-        tab-size: 4;
         width: calc(100% - 2rem);
     }
 
-    .textarea__submit {
+    .debugger__submit {
 
         align-items: center;
         background-color: #9D9DFF;
-        bottom: 0.5rem;
+        bottom: calc(0.25rem - 1px);
         color: #efefef;
         clip-path: polygon(1rem 0, 100% 0, 100% 100%, 0 100%);
         display: flex;
@@ -39,7 +37,7 @@
         width: 20%;
     }
 
-    .textarea__submit:hover {
+    .debugger__submit:hover {
         background-color: #efefef;
         color: #2d2d2d;
         cursor: pointer;
@@ -56,11 +54,11 @@
     }
 }
 
-.textarea__wrapper::after {
+.debugger__wrapper::after {
 
     align-items: center;
     background-color: #9D9DFF;
-    content: 'Javascript';
+    content: 'Debugger';
     color: #efefef;
     display: flex;
     font-family: 'Open Sans', sans-serif;
@@ -72,7 +70,7 @@
     top: 0;
 }
 
-.textarea__wrapper::before {
+.debugger__wrapper::before {
     
     background-color: #9D9DFF;
     clip-path: polygon(0 0, 2rem 0, 0 2rem);
@@ -86,3 +84,4 @@
     width: 2rem;
     z-index: 1;
 }
+    

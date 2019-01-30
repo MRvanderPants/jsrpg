@@ -1,14 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { Interfaces } from './services/interface.service';
+import { Classes } from './services/classes.service';
 
 import { AppComponent } from './app.component';
 import { TextareaComponent } from './components/textarea/textarea.component';
 import { GameComponent } from './components/game/game.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SpriteComponent } from './components/sprite/sprite.component';
-
-import { Interfaces } from './services/interface.service';
+import { DebugComponent } from './components/debug/debug.component';
+import { ControllerComponent } from './components/controller/controller.component';
 
 
 @NgModule({
@@ -17,13 +19,16 @@ import { Interfaces } from './services/interface.service';
     TextareaComponent,
     GameComponent,
     HeaderComponent,
-    SpriteComponent
+    SpriteComponent,
+    DebugComponent,
+    ControllerComponent
   ],
   imports: [
     BrowserModule
   ],
   providers: [
-    Interfaces
+    Interfaces,
+    Classes
   ],
   bootstrap: [
     AppComponent

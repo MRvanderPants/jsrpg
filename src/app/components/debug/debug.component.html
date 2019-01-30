@@ -1,0 +1,12 @@
+<div class="debugger__wrapper">
+  <div #area class="debugger__content">
+    <div class="debugger__item" *ngFor="let log of logs">
+      <span class="debugger__item__time">{{ log.time }}</span>
+      <span class="debugger__item__message">: {{ log.logs.join(', ') }}</span>
+    </div>
+  </div>
+
+  <div class="debugger__submit" (click)="submit()" [class.disabled]="disabled">
+    <i class="material-icons textarea__submit__icon">clear</i>
+  </div>
+</div>

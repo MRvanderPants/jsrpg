@@ -1,0 +1,11 @@
+.input-wrapper {
+    
+    display: flex;
+    flex-wrap: wrap;
+
+    app-textarea, app-debug {
+        flex-grow: 1;
+        min-width: 50%;
+    }
+}
+    
