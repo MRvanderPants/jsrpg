@@ -2,6 +2,7 @@
   <textarea #area class="textarea"></textarea>
 
   <div class="textarea__submit" (click)="submit()" [class.disabled]="disabled">
-    <i class="material-icons textarea__submit__icon">play_arrow</i>
+    <i class="material-icons textarea__submit__icon" *ngIf="!disabled">play_arrow</i>
+    <i class="material-icons textarea__submit__icon textarea__submit__icon--animating" *ngIf="disabled">autorenew</i>
   </div>
 </div>

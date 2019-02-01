@@ -1,5 +1,5 @@
 <app-game></app-game>
 <section class="input-wrapper">
-    <app-textarea (execute)="executeScript($event)"></app-textarea>
+    <app-textarea [disabled]="disabled" (execute)="executeScript($event)"></app-textarea>
     <app-debug [logs]="logs" (clear)="clearLog()"></app-debug>
 </section>

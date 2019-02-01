@@ -1,3 +1,7 @@
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
 .textarea__wrapper {
 
     margin-bottom: -0.3rem;
@@ -18,9 +22,21 @@
         height: 17rem;
         line-height: 1.5rem;
         padding: 1.5rem 1rem 1rem 1rem;
+        position: relative;
         resize: none;
         tab-size: 4;
         width: calc(100% - 2rem);
+    }
+
+    .textarea:after {
+
+        background-color: #9d9dff;
+        bottom: 0;
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 0.25rem;
     }
 
     .textarea__submit {
@@ -37,6 +53,12 @@
         right: 0;
         transition: all 0.2s;
         width: 20%;
+
+        .textarea__submit__icon--animating {
+            -webkit-animation:spin 3s linear infinite;
+            -moz-animation:spin 3s linear infinite;
+            animation:spin 3s linear infinite;
+        }
     }
 
     .textarea__submit:hover {
@@ -46,12 +68,12 @@
     }
 
     .disabled {
-        background-color: #adadad;
+        background-color: #6e6e6e;
         color: #efefef;
     }
 
     .disabled:hover {
-        background-color: #adadad;
+        background-color: #6e6e6e;
         color: #efefef;
     }
 }

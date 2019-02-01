@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-textarea',
@@ -11,7 +11,7 @@ export class TextareaComponent implements OnInit {
 
   @Output() execute: EventEmitter<string>;
 
-  public disabled: boolean;
+  @Input() disabled: boolean;
 
   private areaDOM: any;
 
@@ -24,7 +24,7 @@ export class TextareaComponent implements OnInit {
     this.disabled = false;
 
     this.areaDOM = this.area.nativeElement;
-    this.areaDOM.innerHTML = `debug.log(player.getStats());`;
+    this.areaDOM.innerHTML = `const stats = JSON.stringify(player.getStats());\ndebug.log(stats);`;
 
     this.fixTabs();
   }
@@ -34,8 +34,9 @@ export class TextareaComponent implements OnInit {
    * Event handler for the button
    */
   public submit (): void {
-    // this.disabled = true;
-    this.execute.emit(this.areaDOM.value);
+    if (!this.disabled) {
+      this.execute.emit(this.areaDOM.value);
+    }
   }
 
 

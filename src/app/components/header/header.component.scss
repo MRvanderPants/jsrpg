@@ -32,6 +32,19 @@
     width: calc(100% - 10vw);
 }
 
+.header:before {
+
+    background-color: #3b3e61;
+    bottom: 0;
+    clip-path: polygon(33% 0, 100% 0, 100% 100%, calc(33% - 4rem) 100%);
+    content: '';
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: -1;
+}
+
 .header__margin {
     height: 4rem;
 }

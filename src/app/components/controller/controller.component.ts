@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Classes } from '../../services/classes.service';
+import { PlayerService } from '../../services/player.service';
+import { EnemyService } from '../../services/enemy.service';
 
 @Component({
   selector: 'app-controller',
@@ -9,14 +11,15 @@ import { Classes } from '../../services/classes.service';
 export class ControllerComponent implements OnInit {
 
   public logs: any;
+  public disabled: boolean;
 
   constructor() {
     this.logs = [];
   }
 
   ngOnInit() {
-    window['p'] =  Classes.generatePlayer();
-    window['e'] =  Classes.generateEnemy();
+    window['p'] =  PlayerService.generatePlayer();
+    window['e'] =  EnemyService.generateEnemy();
     window['d'] =  Classes.generateDebugger(this);
   }
 
@@ -56,5 +59,6 @@ export class ControllerComponent implements OnInit {
       }; new f(window.p, window.e, window.d);`;
     document.body.appendChild(newScript);
     newScript.parentNode.removeChild(newScript);
+    this.disabled = true;
   }
 }

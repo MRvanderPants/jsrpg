@@ -8,42 +8,6 @@ export class Classes {
 
 
   /**
-   * Generates a closed player class-instance
-   */
-  public static generatePlayer () {
-
-    const Player = function () {
-
-        const stats = [5, 4, 12];
-
-        this.getStats = function () {
-            return stats;
-        };
-    };
-
-    return new Player();
-  }
-
-
-  /**
-   * Generates a closed enemy class-instance
-   */
-  public static generateEnemy () {
-
-    const Enemy = function () {
-
-        const stats = [5, 4, 12];
-
-        this.getStats = function () {
-            return stats;
-        };
-    };
-
-    return new Enemy();
-  }
-
-
-  /**
    * Generates a closed debugger class-instance
    */
   public static generateDebugger (controller: ControllerComponent) {

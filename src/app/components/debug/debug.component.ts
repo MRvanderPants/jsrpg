@@ -21,17 +21,28 @@ export class DebugComponent implements OnInit {
 
   ngOnInit() {
 
-    const wrapperWidth = this.wrapper.nativeElement.clientWidth;
-    const elements = document.getElementsByClassName('debugger__item__message');
+    window.addEventListener('resize', () => { this.calcWidth(); }, false);
 
     setTimeout(() => {
-      for (let i = 0; i < elements.length; i++) {
-        elements[i]['style'].width = (wrapperWidth * 0.75) + 'px';
-      }
+      this.calcWidth();
     });
   }
 
   private onClear (): void {
     this.clear.emit();
+  }
+
+
+  /**
+   * Calculates the debugger elements width
+   */
+  private calcWidth (): void {
+
+    const wrapperWidth = this.wrapper.nativeElement.clientWidth;
+    const elements = document.getElementsByClassName('debugger__item__message');
+
+    for (let i = 0; i < elements.length; i++) {
+      elements[i]['style'].width = (wrapperWidth * 0.75) + 'px';
+    }
   }
 }
