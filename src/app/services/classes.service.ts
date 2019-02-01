@@ -14,7 +14,6 @@ export class Classes {
 
     const Player = function () {
 
-        const User = null;
         const stats = [5, 4, 12];
 
         this.getStats = function () {
@@ -23,6 +22,24 @@ export class Classes {
     };
 
     return new Player();
+  }
+
+
+  /**
+   * Generates a closed enemy class-instance
+   */
+  public static generateEnemy () {
+
+    const Enemy = function () {
+
+        const stats = [5, 4, 12];
+
+        this.getStats = function () {
+            return stats;
+        };
+    };
+
+    return new Enemy();
   }
 
 
@@ -50,6 +67,13 @@ export class Classes {
       this['clear'] = function () {
         controller.clearLog();
       };
+
+      this.log('Welcome to MRvanderPants.com, '
+        + 'portfolio of local game and -web  enthousiast '
+        + 'of Sjoerd "MRvanderPants" van den Broek. Feel '
+        + 'free to try your hand at programming an AI in '
+        + 'this game I created.'
+      );
     };
 
     return new Debug();

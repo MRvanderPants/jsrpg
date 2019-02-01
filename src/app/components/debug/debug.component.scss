@@ -15,10 +15,35 @@
         color: #efefef;
         font-family: 'Source Code Pro', monospace;
         font-size: 0.833rem;
-        height: 20rem;
+        height: 17rem;
         line-height: 1.5rem;
         padding: 1.5rem 1rem 1rem 1rem;
         width: calc(100% - 2rem);
+
+        .debugger__item {
+
+            align-items: baseline;
+            display: flex;
+
+            .debugger__item__time {
+                color: #969696;
+            }
+
+            .debugger__item__item {
+                
+                color: #969696;
+                font-size: 0.6rem;
+                height: 1rem;
+                width: 1rem;
+            }
+
+            .debugger__item__message {
+
+                display: block;
+                padding-left: 1rem;
+                width:  35vw;
+            }
+        }
     }
 
     .debugger__submit {

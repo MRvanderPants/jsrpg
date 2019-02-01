@@ -16,6 +16,7 @@ export class ControllerComponent implements OnInit {
 
   ngOnInit() {
     window['p'] =  Classes.generatePlayer();
+    window['e'] =  Classes.generateEnemy();
     window['d'] =  Classes.generateDebugger(this);
   }
 
@@ -25,9 +26,10 @@ export class ControllerComponent implements OnInit {
    * @param { string } log
    */
   public pushLog (time: string, logs: Array<string>): void {
+
     this.logs.push({
       time: time,
-      logs: logs
+      logs: logs.join(', ')
     });
   }
 
@@ -48,10 +50,10 @@ export class ControllerComponent implements OnInit {
 
     const newScript = document.createElement('script');
     newScript.innerHTML = `
-      function f (player, debug) {
+      function f (player, enemy, debug) {
       var window = null, document = null;
       ${ data }
-      }; new f(window.p, window.d);`;
+      }; new f(window.p, window.e, window.d);`;
     document.body.appendChild(newScript);
     newScript.parentNode.removeChild(newScript);
   }
