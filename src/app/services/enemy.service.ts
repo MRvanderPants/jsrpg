@@ -7,34 +7,47 @@ export class EnemyService {
   constructor() { }
 
 
-  /**
-   * Generates a closed enemy class-instance
-   */
-  public static generateEnemy () {
+    /**
+     * Generates a closed enemy class-instance
+     */
+    public static generateCharacter (profile: any) {
 
-    const Enemy = function () {
+        const Enemy = function (stats: any) {
 
-        const stats = {
-            maxHealth: 5,
-            health: 5,
-            attack: 3,
-            defence: 2,
-            speed: 3
+            this.id = 'enemy';
+
+            const curStats = stats;
+            let curMove = '';
+
+            this.getStats = function () {
+                return curStats;
+            };
+
+            this.attack = function () {
+                curMove = 'attack';
+                window['listeners'].filter(a => a.id === 'attack')[0].callback(this);
+            };
+
+            this.defend = function () {
+                curMove = 'defend';
+                window['listeners'].filter(a => a.id === 'defend')[0].callback(this);
+            };
+
+            this._resolveTurn = function (turnData: any) {
+
+                switch (turnData.id) {
+
+                    case 'damage': {
+                        const damage = (curMove === 'defend')
+                            ? turnData.value - curStats.defence
+                            : turnData.value;
+                        curStats.health -= damage;
+                        break;
+                    }
+                }
+            };
         };
 
-        this.getStats = function () {
-            return stats;
-        };
-
-        this.attack = function (target: any) {
-            console.log('attacking');
-        };
-
-        this.defend = function (target: any) {
-            console.log('defending');
-        };
-    };
-
-    return new Enemy();
+        return new Enemy(profile);
     }
 }

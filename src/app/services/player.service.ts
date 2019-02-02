@@ -4,37 +4,35 @@ import { ControllerComponent } from '../components/controller/controller.compone
 @Injectable()
 export class PlayerService {
 
-  constructor() { }
+    constructor() { }
 
 
-  /**
-   * Generates a closed player class-instance
-   */
-  public static generatePlayer () {
+    /**
+     * Generates a closed player class-instance
+     */
+    public static generatePlayer (profile: any) {
 
-    const Player = function () {
+        const Player = function (stats) {
 
-        const stats = {
-            maxHealth: 5,
-            health: 5,
-            attack: 3,
-            defence: 2,
-            speed: 3
+            this.id = 'player';
+
+            this.getStats = function () {
+                return stats;
+            };
+
+            this.attack = function () {
+                window['listeners'].filter(a => a.id === 'attack')[0].callback(this);
+            };
+
+            this.defend = function () {
+                window['listeners'].filter(a => a.id === 'defend')[0].callback(this);
+            };
+
+            this._resolveTurn = function (change: any) {
+                
+            };
         };
 
-        this.getStats = function () {
-            return stats;
-        };
-
-        this.attack = function (target: any) {
-            console.log('attacking');
-        };
-
-        this.defend = function (target: any) {
-            console.log('defending');
-        };
-    };
-
-    return new Player();
-  }
+        return new Player(profile);
+    }
 }

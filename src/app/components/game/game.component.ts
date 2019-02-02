@@ -9,10 +9,14 @@ import { SpriteAnimation } from '../../services/interface.service';
 export class GameComponent implements OnInit {
 
   @Input() player;
-  @Input() enemies;
+  @Input() enemy;
 
   public testPlayer: SpriteAnimation;
   public testEnemy: SpriteAnimation;
+
+  public playerHealth: number;
+  public enemyHealth: Array<number>;
+  public turnIndex: number;
 
   constructor() {
 
@@ -32,6 +36,44 @@ export class GameComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.createGame();
   }
 
+
+  /**
+   * Creates a new game
+   */
+  private createGame (): void {
+
+    this.turnIndex = 0;
+    this.playerHealth = this.player.getStats().health;
+    this.enemyHealth = this.enemy.getStats().health;
+
+    const starter = this.findStartingPlayer();
+    console.log('start', starter);
+  }
+
+
+  /**
+   * Finds which character gets to starts the battle
+   * @returns { any }
+   */
+  private findStartingPlayer (): any {
+
+    const enSpeed = this.enemy.getStats().speed;
+    const plSpeed = this.player.getStats().speed;
+
+    if (enSpeed === plSpeed) { // Cointoss
+      const r = Math.random();
+      return (r < 0.5)
+        ? this.player
+        : this.enemy;
+    }
+
+    if (enSpeed > plSpeed) {
+      return this.enemy;
+    }
+
+    return this.player;
+  }
 }

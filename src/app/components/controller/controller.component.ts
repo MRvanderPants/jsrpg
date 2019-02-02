@@ -13,19 +13,38 @@ export class ControllerComponent implements OnInit {
   public logs: any;
   public disabled: boolean;
   public player: any;
-  public enemies: Array<any>;
+  public enemy: any;
 
   constructor() {
     this.logs = [];
   }
 
   ngOnInit() {
-    window['p'] =  PlayerService.generatePlayer();
-    window['e'] =  EnemyService.generateEnemy();
+
+    window['p'] =  PlayerService.generatePlayer(this.generateStats());
+    window['e'] =  EnemyService.generateEnemy(this.generateStats());
     window['d'] =  Classes.generateDebugger(this);
 
+    window['listeners'] = [{
+      id: 'attack',
+      callback: (e) => { this.attack(e); }
+    }, {
+      id: 'defend',
+      callback: (e) => { this.defend(e); }
+    }];
+
     this.player = window['p'];
-    this.enemies = [window['e']];
+    this.enemy = window['e'];
+
+    console.log(this.player, this.player.getStats(), this.enemy.getStats());
+  }
+
+
+  /**
+   * Starts a new game
+   */
+  public startGame (): void {
+    this.player.health = this.player.maxHealth;
   }
 
 
@@ -54,7 +73,7 @@ export class ControllerComponent implements OnInit {
    * Executes the JS code from the textarea
    * @param { string } data
    */
-  private executeScript (data: string): void {
+  public executeScript (data: string): void {
 
     const newScript = document.createElement('script');
     newScript.innerHTML = `
@@ -65,5 +84,70 @@ export class ControllerComponent implements OnInit {
     document.body.appendChild(newScript);
     newScript.parentNode.removeChild(newScript);
     this.disabled = true;
+  }
+
+
+  /**
+   * Provide a stat-profile
+   * @returns { any }
+   */
+  private generateStats (): any {
+
+    const r = Math.random();
+    if (r < 0.33) {
+      return { // Average
+        maxHealth: 5,
+        health: 5,
+        attack: 3,
+        defence: 3,
+        speed: 3
+      };
+    }
+    else if (r >= 0.33 && r < 0.66) {
+      return { // Defensive
+        maxHealth: 5,
+        health: 5,
+        attack: 3,
+        defence: 5,
+        speed: 1
+      };
+    }
+    else {
+      return { // Offensive
+        maxHealth: 5,
+        health: 5,
+        attack: 5,
+        defence: 1,
+        speed: 3
+      };
+    }
+  }
+
+
+  /**
+   * Parse an attack
+   * @param { any } character
+   */
+  private attack (character: any): void {
+
+    const target = (character.id === 'player')
+      ? this.enemy
+      : this.player;
+
+    target._resolveTurn({
+      id: 'damage',
+      value: character.getStats().attack
+    });
+
+    console.log('attack', character);
+  }
+
+
+  /**
+   * Parse an attack
+   * @param { any } character
+   */
+  private defend (character: any): void {
+    console.log('defend', character);
   }
 }
