@@ -7,6 +7,19 @@ export interface SpriteAnimation {
   mirror: boolean;
 }
 
+export interface CharacterStats {
+  maxHealth: number;
+  health: number;
+  attack: number;
+  defence: number;
+  speed: number;
+}
+
+export interface TurnData {
+  id: string;
+  value: any;
+}
+
 @Injectable()
 export class Interfaces {
 

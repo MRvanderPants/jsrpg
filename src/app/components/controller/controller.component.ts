@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Classes } from '../../services/classes.service';
-import { PlayerService } from '../../services/player.service';
-import { EnemyService } from '../../services/enemy.service';
+import { CharacterService } from '../../services/character.service';
+import { CharacterStats } from '../../services/interface.service';
+import { Helper } from '../../services/helper';
 
 @Component({
   selector: 'app-controller',
@@ -14,27 +15,29 @@ export class ControllerComponent implements OnInit {
   public disabled: boolean;
   public player: any;
   public enemy: any;
+  public debug: any;
+
+  private attackingCharacters: Array<any>;
 
   constructor() {
     this.logs = [];
+    this.attackingCharacters = [];
   }
 
   ngOnInit() {
 
-    window['p'] =  PlayerService.generatePlayer(this.generateStats());
-    window['e'] =  EnemyService.generateEnemy(this.generateStats());
+    window['p'] =  CharacterService.generateCharacter('player', Helper.generateStats());
+    window['e'] =  CharacterService.generateCharacter('enemy', Helper.generateStats());
     window['d'] =  Classes.generateDebugger(this);
 
     window['listeners'] = [{
       id: 'attack',
-      callback: (e) => { this.attack(e); }
-    }, {
-      id: 'defend',
-      callback: (e) => { this.defend(e); }
+      callback: (e) => { this.attackingCharacters.push(e); } // <-- put callbacks into a list to resolve later
     }];
 
     this.player = window['p'];
     this.enemy = window['e'];
+    this.debug = window['d'];
 
     console.log(this.player, this.player.getStats(), this.enemy.getStats());
   }
@@ -73,53 +76,40 @@ export class ControllerComponent implements OnInit {
    * Executes the JS code from the textarea
    * @param { string } data
    */
-  public executeScript (data: string): void {
+  public executeLoop (data: string): void {
 
+    this.debug.clear();
+
+    // Let the AI decide their turn
+    this.enemy._resolveTurn({
+      id: 'decide',
+      value: this.player
+    });
+
+    // Execute the player defined script
     const newScript = document.createElement('script');
     newScript.innerHTML = `
       function f (player, enemy, debug) {
       var window = null, document = null;
       ${ data }
-      }; new f(window.p, window.e, window.d);`;
+      }; new f(window.p, window.e.getStats(), window.d);`;
     document.body.appendChild(newScript);
     newScript.parentNode.removeChild(newScript);
     this.disabled = true;
-  }
 
+    // Handle possible attacks this round
+    if (this.attackingCharacters.length > 0) {
 
-  /**
-   * Provide a stat-profile
-   * @returns { any }
-   */
-  private generateStats (): any {
+      // Sort the list based on character speeds
+      this.attackingCharacters = this.attackingCharacters.sort((a, b) => {
+        return b.getStats().speed - a.getStats().speed;
+      });
 
-    const r = Math.random();
-    if (r < 0.33) {
-      return { // Average
-        maxHealth: 5,
-        health: 5,
-        attack: 3,
-        defence: 3,
-        speed: 3
-      };
-    }
-    else if (r >= 0.33 && r < 0.66) {
-      return { // Defensive
-        maxHealth: 5,
-        health: 5,
-        attack: 3,
-        defence: 5,
-        speed: 1
-      };
-    }
-    else {
-      return { // Offensive
-        maxHealth: 5,
-        health: 5,
-        attack: 5,
-        defence: 1,
-        speed: 3
-      };
+      // Execute attacking moves
+      this.attackingCharacters.forEach((character) => {
+        this.debug.log(`${ character.id } attacked!`);
+        this.attack(character);
+      });
     }
   }
 
@@ -139,15 +129,6 @@ export class ControllerComponent implements OnInit {
       value: character.getStats().attack
     });
 
-    console.log('attack', character);
-  }
-
-
-  /**
-   * Parse an attack
-   * @param { any } character
-   */
-  private defend (character: any): void {
-    console.log('defend', character);
+    console.log('attack', character, target.getStats());
   }
 }

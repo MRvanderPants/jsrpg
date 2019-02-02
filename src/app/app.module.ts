@@ -3,8 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { Interfaces } from './services/interface.service';
 import { Classes } from './services/classes.service';
-import { PlayerService } from './services/player.service';
-import { EnemyService } from './services/enemy.service';
+import { CharacterService } from './services/character.service';
 
 import { AppComponent } from './app.component';
 import { TextareaComponent } from './components/textarea/textarea.component';
@@ -33,8 +32,7 @@ import { HealthbarComponent } from './components/healthbar/healthbar.component';
   providers: [
     Interfaces,
     Classes,
-    PlayerService,
-    EnemyService
+    CharacterService
   ],
   bootstrap: [
     AppComponent
