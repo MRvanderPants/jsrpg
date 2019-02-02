@@ -15,6 +15,7 @@ export class EnemyService {
     const Enemy = function () {
 
         const stats = {
+            maxHealth: 5,
             health: 5,
             attack: 3,
             defence: 2,

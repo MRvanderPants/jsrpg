@@ -11,6 +11,7 @@ export class SpriteComponent implements OnInit {
   @ViewChild('sprite') sprite;
 
   @Input() animation: SpriteAnimation;
+  @Input() controller: any;
 
   @Output() animationEnd: EventEmitter<SpriteAnimation>;
 

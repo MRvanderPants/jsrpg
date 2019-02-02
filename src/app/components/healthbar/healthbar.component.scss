@@ -1,0 +1,38 @@
+.healthbar {
+
+    background-color: #6e6e6e;
+    height: 0.5rem;
+    position: relative;
+    overflow: hidden;
+    top: -1rem;
+    width: 5rem;
+
+    .healthbar__fill {
+
+        background-color: #9D9DFF;
+        clip-path: polygon(0 0, 100% 0, calc(100% - 0.5rem) 100%, 0 100%);
+        height: 100%;
+        width: calc(100% + 0.5rem);
+    }
+}
+
+.healthbar:after {
+
+    background-color: #ffffff;
+    bottom: 0;
+    clip-path: polygon(100% 0, 100% 100%, 0 100%);
+    content: '';
+    height: 0.5rem;
+    position: absolute;
+    right: 0;
+    width: 0.5rem;
+}
+
+.mirrored {
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+}

@@ -12,6 +12,8 @@ export class ControllerComponent implements OnInit {
 
   public logs: any;
   public disabled: boolean;
+  public player: any;
+  public enemies: Array<any>;
 
   constructor() {
     this.logs = [];
@@ -21,6 +23,9 @@ export class ControllerComponent implements OnInit {
     window['p'] =  PlayerService.generatePlayer();
     window['e'] =  EnemyService.generateEnemy();
     window['d'] =  Classes.generateDebugger(this);
+
+    this.player = window['p'];
+    this.enemies = [window['e']];
   }
 
 

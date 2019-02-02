@@ -1,5 +1,18 @@
-<app-game></app-game>
+<app-game
+    [player]="player"
+    [enemies]="enemies">
+</app-game>
+
 <section class="input-wrapper">
-    <app-textarea [disabled]="disabled" (execute)="executeScript($event)"></app-textarea>
-    <app-debug [logs]="logs" (clear)="clearLog()"></app-debug>
+
+    <app-textarea
+        [disabled]="disabled"
+        (execute)="executeScript($event)">
+    </app-textarea>
+
+    <app-debug
+        [logs]="logs"
+        (clear)="clearLog()">
+    </app-debug>
+    
 </section>

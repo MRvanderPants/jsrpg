@@ -1,8 +1,17 @@
 <section class="game">
 
   <div class="game__wrapper">
-    <app-sprite [animation]="testPlayer"></app-sprite>
-    <app-sprite [animation]="testEnemy"></app-sprite>
+
+    <app-sprite
+      [animation]="testPlayer"
+      [controller]="player">
+    </app-sprite>
+    
+    <app-sprite
+      [animation]="testEnemy"
+      [controller]="enemy"
+      *ngFor="let enemy of enemies">
+    </app-sprite>
+
   </div>
-  
 </section>

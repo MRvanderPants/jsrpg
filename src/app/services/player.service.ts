@@ -15,10 +15,11 @@ export class PlayerService {
     const Player = function () {
 
         const stats = {
-          health: 5,
-          attack: 3,
-          defence: 2,
-          speed: 3
+            maxHealth: 5,
+            health: 5,
+            attack: 3,
+            defence: 2,
+            speed: 3
         };
 
         this.getStats = function () {

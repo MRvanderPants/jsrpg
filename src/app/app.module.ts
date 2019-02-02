@@ -13,6 +13,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { SpriteComponent } from './components/sprite/sprite.component';
 import { DebugComponent } from './components/debug/debug.component';
 import { ControllerComponent } from './components/controller/controller.component';
+import { HealthbarComponent } from './components/healthbar/healthbar.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { ControllerComponent } from './components/controller/controller.componen
     HeaderComponent,
     SpriteComponent,
     DebugComponent,
-    ControllerComponent
+    ControllerComponent,
+    HealthbarComponent
   ],
   imports: [
     BrowserModule

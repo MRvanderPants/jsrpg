@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { SpriteAnimation } from '../../services/interface.service';
 
 @Component({
@@ -7,6 +7,9 @@ import { SpriteAnimation } from '../../services/interface.service';
   styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements OnInit {
+
+  @Input() player;
+  @Input() enemies;
 
   public testPlayer: SpriteAnimation;
   public testEnemy: SpriteAnimation;
