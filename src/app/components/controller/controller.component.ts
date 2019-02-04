@@ -111,6 +111,19 @@ export class ControllerComponent implements OnInit {
         this.attack(character);
       });
     }
+
+    const playerDefeated = this.player.getStats().health <= 0;
+    const enemyDefeated = this.enemy.getStats().health <= 0;
+
+    setTimeout(() => {
+
+      if (!playerDefeated && !enemyDefeated) {
+        this.executeLoop(data);
+      }
+      else {
+        alert('The game has ended');
+      }
+    }, 1000);
   }
 
 
@@ -128,7 +141,5 @@ export class ControllerComponent implements OnInit {
       id: 'damage',
       value: character.getStats().attack
     });
-
-    console.log('attack', character, target.getStats());
   }
 }

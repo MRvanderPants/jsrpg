@@ -42,7 +42,7 @@ export class DebugComponent implements OnInit {
     const elements = document.getElementsByClassName('debugger__item__message');
 
     for (let i = 0; i < elements.length; i++) {
-      elements[i]['style'].width = (wrapperWidth * 0.75) + 'px';
+      elements[i]['style'].width = (wrapperWidth * 0.70) + 'px';
     }
   }
 }
