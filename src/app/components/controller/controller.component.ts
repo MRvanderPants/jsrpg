@@ -78,7 +78,7 @@ export class ControllerComponent implements OnInit {
    */
   public executeLoop (data: string): void {
 
-    this.debug.clear();
+    // this.debug.clear();
 
     // Let the AI decide their turn
     this.enemy._resolveTurn({
@@ -98,6 +98,35 @@ export class ControllerComponent implements OnInit {
     this.disabled = true;
 
     // Handle possible attacks this round
+    this.parseAttackingCharacters(data);
+  }
+
+
+  /**
+   * Resolve the turn
+   * @param { string } data
+   */
+  private resolveTurn (data: string): void {
+
+    const playerDefeated = this.player.getStats().health <= 0;
+    const enemyDefeated = this.enemy.getStats().health <= 0;
+
+    if (!playerDefeated && !enemyDefeated) {
+      this.executeLoop(data);
+    }
+    else {
+      this.debug.log('The game has ended');
+      this.disabled = false;
+    }
+  }
+
+
+  /**
+   * Look for attacking characters
+   * @param { string } data
+   */
+  private parseAttackingCharacters (data: string): void {
+
     if (this.attackingCharacters.length > 0) {
 
       // Sort the list based on character speeds
@@ -106,24 +135,22 @@ export class ControllerComponent implements OnInit {
       });
 
       // Execute attacking moves
-      this.attackingCharacters.forEach((character) => {
+      const _attack = (index: number) => {
+
+        const character = this.attackingCharacters[index];
         this.debug.log(`${ character.id } attacked!`);
         this.attack(character);
-      });
+        index++;
+
+        if (index < this.attackingCharacters.length) {
+          _attack(index);
+        }
+        else {
+          this.resolveTurn(data);
+        }
+      };
+      _attack(0);
     }
-
-    const playerDefeated = this.player.getStats().health <= 0;
-    const enemyDefeated = this.enemy.getStats().health <= 0;
-
-    setTimeout(() => {
-
-      if (!playerDefeated && !enemyDefeated) {
-        this.executeLoop(data);
-      }
-      else {
-        alert('The game has ended');
-      }
-    }, 1000);
   }
 
 
@@ -133,13 +160,16 @@ export class ControllerComponent implements OnInit {
    */
   private attack (character: any): void {
 
-    const target = (character.id === 'player')
-      ? this.enemy
-      : this.player;
+    setTimeout(() => {
 
-    target._resolveTurn({
-      id: 'damage',
-      value: character.getStats().attack
-    });
+      const target = (character.id === 'player')
+        ? this.enemy
+        : this.player;
+
+      target._resolveTurn({
+        id: 'damage',
+        value: character.getStats().attack
+      });
+    }, 1000);
   }
 }
