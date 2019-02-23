@@ -1,5 +1,25 @@
 <div class="header__margin"></div>
 
-<div class="header">
-  <h1 class="header__title">MRvanderPants</h1>
+<div class="header honeyFade">
+
+  <div class="header__title__wrapper">
+    <h1 class="header__title">
+      MRvanderPants
+    </h1>
+  </div>
+
+  <div class="header__nav">
+
+    <div
+      class="header__nav__item"
+      *ngFor="let route of routes"
+      [class.active]="route.current"
+      (click)="activate(route)">
+
+      <span class="header__nav__item__label">
+        {{ route.id }}
+      </span>
+    </div>
+
+  </div>
 </div>

@@ -1,10 +1,10 @@
 .game {
 
     align-items: flex-end;
-    background: #efefef url('/assets/background.png');
+    background: var(--col-beige-lighter) url('/assets/background.png');
     background-position: center bottom;
     display: flex;
-    height: 20vh;
+    height: 40vh;
     justify-content: center;
     position: relative;
     width: 100%;
@@ -22,7 +22,7 @@
 
 .game:after {
 
-    background-color: #ffffff;
+    background-color: var(--col-grey);
     bottom: 0;
     content: '';
     height: 0.25rem;

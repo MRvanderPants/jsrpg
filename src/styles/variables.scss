@@ -1,0 +1,38 @@
+:root {
+
+    --col-white: #ffffff;
+    --col-grey-lightest: #f0f0f0;
+    --col-grey: #d3d3d3;
+    --col-grey-darker: #555555;
+    --col-grey-darkest: #2d2d2d;
+    --col-black: #000000;
+
+    --col-yellow-lightest: #fff19c;
+    --col-yellow-lighter: #ffe643;
+    --col-yellow: #ebcb00;
+    --col-yellow-darker: #e69a02;
+    --col-yellow-darkest: #c68300;
+
+    --col-blue-lightest: #b7dbff;
+    --col-blue-lighter: #80c0ff;
+    --col-blue: #4aa5ff;
+    --col-blue-darker: #3382d1;
+    --col-blue-darkest: #2563a0;
+
+    --col-beige-lightest: #ffffff;
+    --col-beige-lighter: #fffce9;
+    --col-beige: #f2eed8;
+    --col-beige-darker: #eae4c8;
+    --col-beige-darkest: #e0d9b4;
+
+    --col-danger: #ff1f1f;
+}
+
+.honeyFade {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ebcb00+0,e69a02+100 */
+    background: #ebcb00; /* Old browsers */
+    background: -moz-linear-gradient(left, #ebcb00 0%, #e69a02 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, #ebcb00 0%,#e69a02 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, #ebcb00 0%,#e69a02 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebcb00', endColorstr='#e69a02',GradientType=1 ); /* IE6-9 */
+}

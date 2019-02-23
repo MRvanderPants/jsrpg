@@ -1,50 +1,102 @@
 .header {
-
+    
     align-items: center;
-    background-color: #9D9DFF;
     display: flex;
-    height: 4rem;
+    flex-wrap: wrap;
+    min-height: auto;
+    justify-content: center;
+    padding: 0.5rem 0 0 0;
+    position: absolute;
     top: 0;
     width: 100%;
-    z-index: 1;
-
-    position: absolute;
     z-index: 1000;
 
-    .header__title {
+    -webkit-box-shadow: 0 -1.75rem 1.5rem 1.5rem #313131;
+    -moz-box-shadow:    0 -1.75rem 1.5rem 1.5rem #313131;
+    box-shadow:         0 -1.75rem 1.5rem 1.5rem #313131;
 
-        color: #efefef;
-        font-family: 'Quicksand', sans-serif;
-        font-size: 1.5rem;
-        font-weight: 100;
-        padding: 0 2rem;
+    .header__title__wrapper {
+        
+        .header__title {
+    
+            color: var(--col-white);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 100;
+            padding: 0 2rem;
+        }
     }
 }
 
-.header:after {
+.header__nav {
 
-    background-color: #ffffff;
-    bottom: -0.25rem;
-    content: '';
-    height: 0.25rem;
-    left: 10vw;
-    position: absolute;
-    width: calc(100% - 10vw);
-}
+    display: flex;
+    justify-content: center;
+    width: 100%;
 
-.header:before {
+    .header__nav__item {
 
-    background-color: #3b3e61;
-    bottom: 0;
-    clip-path: polygon(33% 0, 100% 0, 100% 100%, calc(33% - 4rem) 100%);
-    content: '';
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: -1;
+        color: var(--col-white);
+        cursor: pointer;
+        font-family: 'Montserrat', sans-serif;
+        opacity: 0.75;
+        padding: 0.25rem 1rem;
+        position: relative;
+        text-align: center;
+        width: 33%;
+    }
+
+    .header__nav__item:hover {
+        color: var(--col-white);
+        opacity: 1;
+    }
+
+    .active {
+        opacity: 1;
+    }
+
+    .active:after {
+        
+        background-color: var(--col-yellow);
+        border-radius: 0 0 0.25rem 0.25rem;
+        bottom: -0.5rem;
+        content: '';
+        display: block;
+        height: 0.5rem;
+        font-size: 0.9rem;
+        left: 0;
+        position: absolute;
+        right: 0;
+        z-index: -1;
+    }
 }
 
 .header__margin {
-    height: 4rem;
+    height: 3.5rem;
+}
+
+@media screen and (min-width: 640px) {
+
+    .header {
+        width: 100%;
+    }
+
+    .header__title__wrapper {
+        padding-bottom: 0.5rem;
+        width: 50%;
+    }
+
+    .header__nav {
+
+        width: 50%;
+
+        .header__nav__item {
+            
+            padding: 0.5rem 1rem 1rem 1rem;
+        }
+    }
+
+    .header__margin {
+        height: 2rem;
+    }
 }

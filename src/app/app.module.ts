@@ -1,9 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { AppRoutingModule } from './app-routing.module';
 
 import { Interfaces } from './services/interface.service';
 import { Classes } from './services/classes.service';
 import { CharacterService } from './services/character.service';
+import { RoutingService } from './services/routing.service';
+
+import { DemoComponent } from './pages/demo/demo.component';
+import { ResumeComponent } from './pages/resume/resume.component';
+import { ContactComponent } from './pages/contact/contact.component';
+import { ErrorComponent } from './pages/error/error.component';
 
 import { AppComponent } from './app.component';
 import { TextareaComponent } from './components/textarea/textarea.component';
@@ -24,15 +32,21 @@ import { HealthbarComponent } from './components/healthbar/healthbar.component';
     SpriteComponent,
     DebugComponent,
     ControllerComponent,
-    HealthbarComponent
+    HealthbarComponent,
+    DemoComponent,
+    ResumeComponent,
+    ContactComponent,
+    ErrorComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
   providers: [
     Interfaces,
     Classes,
-    CharacterService
+    CharacterService,
+    RoutingService
   ],
   bootstrap: [
     AppComponent

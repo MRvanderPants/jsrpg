@@ -142,12 +142,15 @@ export class ControllerComponent implements OnInit {
         this.attack(character);
         index++;
 
-        if (index < this.attackingCharacters.length) {
-          _attack(index);
-        }
-        else {
-          this.resolveTurn(data);
-        }
+        setTimeout(() => {
+
+          if (index < this.attackingCharacters.length) {
+            _attack(index);
+          }
+          else {
+            this.resolveTurn(data);
+          }
+        }, 1000);
       };
       _attack(0);
     }
