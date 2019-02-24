@@ -1,25 +1,26 @@
 .debugger__wrapper {
     
-    border-left: 0.25rem solid #9d9dff;
+    display: block;
+    height: 19.5rem;
     position: relative;
     width: calc(100% - 0.25rem);
 
     .debugger__content {
         
-        background-image: linear-gradient(#2d2d2d 50%, #303030 50%);
+        background-image: linear-gradient(var(--col-beige-lighter) 50%, var(--col-beige-lightest) 50%);
         background-size: 100% 3rem; // 2.1rem
         background-attachment: local;
         border: none;
-        border-bottom: 0.25rem solid #9d9dff;
-        border-top: 0.5rem solid #9D9DFF;
-        color: #efefef;
+        color: var(--col-black);
         font-family: 'Source Code Pro', monospace;
         font-size: 0.833rem;
         height: 17rem;
         line-height: 1.5rem;
         overflow: auto;
         padding: 1.5rem 1rem 1rem 1rem;
+        position: absolute;
         width: calc(100% - 2rem);
+        z-index: 1;
 
         .debugger__item {
 
@@ -51,22 +52,32 @@
     .debugger__submit {
 
         align-items: center;
-        background-color: #9D9DFF;
-        bottom: calc(0.25rem - 1px);
+        background-color: var(--col-blue);
+        border-radius: 3rem;
         color: #efefef;
-        clip-path: polygon(1rem 0, 100% 0, 100% 100%, 0 100%);
         display: flex;
-        height: 1.5rem;
+        height: 3rem;
         justify-content: center;
         position: absolute;
-        right: 0;
+        right: 1.5rem;
+        top: -1.5rem;
         transition: all 0.2s;
-        width: 20%;
+        width: 3rem;
+        z-index: 999;
+
+        -webkit-box-shadow: 0 0.25rem 1rem 0.25rem #00000033;
+        -moz-box-shadow:    0 0.25rem 1rem 0.25rem #00000033;
+        box-shadow:         0 0.25rem 1rem 0.25rem #00000033;
+
+        .textarea__submit__icon--animating {
+            -webkit-animation:spin 3s linear infinite;
+            -moz-animation:spin 3s linear infinite;
+            animation:spin 3s linear infinite;
+        }
     }
 
     .debugger__submit:hover {
-        background-color: #efefef;
-        color: #2d2d2d;
+        background-color: var(--col-blue-darker);
         cursor: pointer;
     }
 
@@ -79,36 +90,5 @@
         background-color: #adadad;
         color: #efefef;
     }
-}
-
-.debugger__wrapper::after {
-
-    align-items: center;
-    background-color: #9D9DFF;
-    content: 'Debugger';
-    color: #efefef;
-    display: flex;
-    font-family: 'Open Sans', sans-serif;
-    height: 1rem;
-    justify-content: center;
-    padding: 0.5rem 1rem;
-    position: absolute;
-    right: 0;
-    top: 0;
-}
-
-.debugger__wrapper::before {
-    
-    background-color: #9D9DFF;
-    clip-path: polygon(0 0, 2rem 0, 0 2rem);
-    content: '';
-    color: #efefef;
-    font-family: 'Open Sans', sans-serif;
-    height: 2rem;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 2rem;
-    z-index: 1;
 }
     

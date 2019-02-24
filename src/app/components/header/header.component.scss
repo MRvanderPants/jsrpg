@@ -11,11 +11,22 @@
     width: 100%;
     z-index: 1000;
 
-    -webkit-box-shadow: 0 -1.75rem 1.5rem 1.5rem #313131;
-    -moz-box-shadow:    0 -1.75rem 1.5rem 1.5rem #313131;
-    box-shadow:         0 -1.75rem 1.5rem 1.5rem #313131;
+    -webkit-box-shadow: 0 -0.5rem 1rem 1rem #00000015;
+    -moz-box-shadow:    0 -0.5rem 1rem 1rem #00000015;
+    box-shadow:         0 -0.5rem 1rem 1rem #00000015;
 
     .header__title__wrapper {
+
+        align-items: center;
+        display: flex;
+
+        .header__icon {
+            padding-left: 2rem;
+
+            img {
+                height: 0.9rem;
+            }
+        }
         
         .header__title {
     
@@ -23,7 +34,7 @@
             font-family: 'Montserrat', sans-serif;
             font-size: 1.1rem;
             font-weight: 100;
-            padding: 0 2rem;
+            padding: 0 2rem 0 0.5rem;
         }
     }
 }

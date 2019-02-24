@@ -1,6 +1,7 @@
 .healthbar {
 
-    background-color: #6e6e6e;
+    background-color: var(--col-grey-darker);
+    border-radius: 0.25rem;
     height: 0.5rem;
     position: relative;
     overflow: hidden;
@@ -9,23 +10,11 @@
 
     .healthbar__fill {
 
-        background-color: #9D9DFF;
-        clip-path: polygon(0 0, 100% 0, calc(100% - 0.5rem) 100%, 0 100%);
+        background-color: var(--col-blue);
+        border-radius: 0.25rem;
         height: 100%;
         width: calc(100% + 0.5rem);
     }
-}
-
-.healthbar:after {
-
-    background-color: #ffffff;
-    bottom: 0;
-    clip-path: polygon(100% 0, 100% 100%, 0 100%);
-    content: '';
-    height: 0.5rem;
-    position: absolute;
-    right: 0;
-    width: 0.5rem;
 }
 
 .mirrored {

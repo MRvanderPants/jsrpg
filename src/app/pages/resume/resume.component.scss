@@ -1,0 +1,149 @@
+.resume {
+
+    margin-top: 2rem;
+
+    .resume__item {
+
+        border-left: 0.25rem solid var(--col-blue);
+        margin-left: 1rem;
+        padding: 0 0 1.5rem 1rem;
+
+        .marker {
+
+            align-items: center;
+            display: flex;
+            margin-left: -1.625rem;
+            position: relative;
+
+            .marker__dot {
+                background-color: var(--col-blue);
+                border-radius: 1rem;
+                height: 1rem;
+                overflow: hidden;
+                width: 1rem;
+            }
+
+            .marker__label {
+                color: var(--col-grey-medium);
+                font-size: 0.9rem;
+                padding-left: 1.75rem;
+                position: absolute;
+            }
+        }
+
+        .resume__item__header {
+
+            padding: 1rem 1rem 0 1rem;
+
+            .resume__item__title {
+
+                font-family: 'Montserrat';
+                font-size: 1rem;
+                padding: 0 0 0.5rem 0;
+            }
+
+            .resume__item__description {
+                color: var(--col-grey-medium);
+                font-size: 0.9rem;
+                padding-bottom: 0.5rem;
+            }
+
+            .resume__item__details__clients {
+                
+                display: flex;
+                flex-direction: column;
+                font-family: 'Montserrat';
+                font-size: 0.9rem;
+                padding: 0 1rem 1rem 0rem;
+
+                .resume__client {
+
+                    align-items: center;
+                    display: flex;
+
+                    .resume__client__icon {
+
+                        font-size: 1.1rem;
+                        padding-right: 0.5rem;
+                    }
+                }
+            }
+        }
+
+        .resume__item__content {
+
+            padding: 0.5rem 1rem;
+
+            .resume__item__details {
+
+                align-items: baseline;
+                display: flex;
+                flex-grow: 1;
+            }
+
+            .resume__item__chips {
+
+                display: flex;
+                flex-wrap: wrap;
+                margin: 0 0 0.5rem 0;
+
+                .resume__item__chips__chip {
+
+                    background-color: var(--col-blue);
+                    border-radius: 0.25rem;
+                    color: var(--col-white);
+                    font-size: 0.8rem;
+                    margin: 0 0.25rem 0.25rem 0;
+                    padding: 0.25rem 1rem;
+                }
+            }
+        }
+    }
+}
+
+
+@media screen and (min-width: 640px) {
+    
+    .resume {
+
+        margin: 5rem auto 0 auto;
+        width: 60%;
+
+        .resume__item {
+
+            padding-bottom: 2rem;
+
+            .resume__item__description {
+                padding-bottom: 1.5rem !important;
+            }
+
+            .resume__item__content {
+                
+                align-items: baseline;
+                display: flex;
+                padding: 0 1rem;
+
+                .resume__item__details {
+                    
+                    align-items: baseline;
+                    display: flex;
+                    flex-grow: 1;
+
+                    .resume__item__details__clients {
+
+                        display: flex;
+                        flex-direction: column;
+                        padding: 0.5rem 1rem 0.5rem 0rem;
+                    }
+                }
+
+                .resume__item__chips {
+
+                    flex-direction: row-reverse;
+                    margin: 0.5rem 0 0.25rem 0 !important;
+                    max-width: 66%;
+                }
+            }
+        }
+    }
+}

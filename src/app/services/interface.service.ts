@@ -20,6 +20,15 @@ export interface TurnData {
   value: any;
 }
 
+export interface Job {
+  role: string;
+  skills: Array<string>;
+  date_start: string;
+  date_end: string;
+  clients: Array<string>;
+  description: string;
+}
+
 @Injectable()
 export class Interfaces {
 

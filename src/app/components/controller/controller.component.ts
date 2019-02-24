@@ -16,12 +16,16 @@ export class ControllerComponent implements OnInit {
   public player: any;
   public enemy: any;
   public debug: any;
+  public largeScreen: boolean;
+  public openedTab: boolean;
 
   private attackingCharacters: Array<any>;
 
   constructor() {
     this.logs = [];
     this.attackingCharacters = [];
+    this.largeScreen = window.innerWidth >= 640;
+    this.openedTab = false;
   }
 
   ngOnInit() {

@@ -6,8 +6,10 @@
     display: flex;
     height: 40vh;
     justify-content: center;
+    margin-bottom: -2rem;
     position: relative;
     width: 100%;
+    z-index: -1;
 
     .game__wrapper {
 
@@ -15,19 +17,7 @@
         display: flex;
         height: 80%;
         justify-content: center;
-        margin-bottom: 0.5rem;
+        margin-bottom: 2.5rem;
         width: 80%;
     }
-}
-
-.game:after {
-
-    background-color: var(--col-grey);
-    bottom: 0;
-    content: '';
-    height: 0.25rem;
-    right: 10vw;
-    position: absolute;
-    width: calc(100% - 10vw);
-    z-index: 100;
 }

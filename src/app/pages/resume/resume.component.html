@@ -1,3 +1,55 @@
-<p>
-  resume works!
-</p>
+<section class="resume">
+
+  <div class="resume__item" *ngFor="let job of jobs">
+
+    <div class="marker">
+      <div class="marker__dot"></div>
+      <span class="marker__label">
+        {{ job.date_start }}
+      </span>
+    </div>
+
+    <div class="resume__item__header">
+      
+      <h2 class="resume__item__title">
+        {{ job.role }}
+      </h2>
+
+      <div class="resume__item__details__clients">
+        <div class="resume__client" *ngFor="let client of job.clients">
+
+          <i class="material-icons resume__client__icon">
+            alternate_email
+          </i>
+          <span class="resume__client__label">
+            {{ client }}
+          </span>
+
+        </div>
+      </div>
+
+      <div class="resume__item__description">
+        {{ job.description }}
+      </div>
+
+    </div>
+
+    <div class="resume__item__content">
+
+      <div class="resume__item__details">
+  
+        
+      </div>
+  
+      <div class="resume__item__chips">
+        <div
+          class="resume__item__chips__chip"
+          *ngFor="let skill of job.skills">
+          {{ skill }}
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>

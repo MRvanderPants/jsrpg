@@ -14,18 +14,20 @@ export class RoutingService {
 
   constructor(private router: Router) {
 
+    const url = window.location.pathname;
+
     this.routes = [{
       id: 'work',
       url: '',
-      current: true
+      current: url === '/'
     }, {
       id: 'resume',
       url: '/resume',
-      current: false
+      current: url === '/resume'
     }, {
       id: 'contact',
       url: '/contact',
-      current: false
+      current: url === '/contact'
     }];
   }
 

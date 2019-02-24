@@ -3,16 +3,39 @@
     [enemy]="enemy">
 </app-game>
 
+<div class="tabs">
+    <div class="tabs-wrapper">
+        <div
+            class="tabs-wrapper__item"
+            [class.active]="!openedTab && !largeScreen"
+            (click)="openedTab = false;">
+            Code
+        </div>
+
+        <div
+            class="tabs-wrapper__item"
+            [class.active]="openedTab && !largeScreen"
+            (click)="openedTab = true;">
+            Console
+        </div>
+    </div>
+    <div class="tabs-border"></div>
+</div>
+
 <section class="input-wrapper">
 
     <app-textarea
         [disabled]="disabled"
-        (execute)="executeLoop($event)">
+        (execute)="executeLoop($event)"
+        *ngIf="largeScreen || !openedTab">
     </app-textarea>
 
     <app-debug
         [logs]="logs"
-        (clear)="clearLog()">
+        (clear)="clearLog()"
+        *ngIf="largeScreen || openedTab">
     </app-debug>
     
 </section>
+
+<div class="lower-border"></div>
