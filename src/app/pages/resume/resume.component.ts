@@ -34,7 +34,7 @@ export class ResumeComponent implements OnInit {
       clients: ['Games [4 Therapy] foundation'],
       description: `Created a playfull application in Unity (C#) for children in therapy that will replace their paper-based assignments and help them become more motivated to participate in therapy. This was a graduation internship.`
     }, {
-      role: 'Design/ Developer',
+      role: 'Designer, Developer',
       skills: ['Javascript'],
       date_start: '2014',
       date_end: '2015',
