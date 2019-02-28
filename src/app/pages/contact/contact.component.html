@@ -1,3 +1,43 @@
-<p>
-  contact works!
-</p>
+<section class="contact">
+
+  <form id="contact-form" class="contact-form" [formGroup]="contactForm" (ngSubmit)="submit()">
+
+    <div class="contact-form__input">
+      <input
+        class="contact-form__input__text"
+        type="text"
+        placeholder="Name"
+        formControlName="name">
+    </div>
+
+    <div class="contact-form__input">
+      <input
+        class="contact-form__input__text"
+        type="text"
+        placeholder="E-mail"
+        formControlName="email">
+    </div>
+
+    <div class="contact-form__input">
+      <input
+        class="contact-form__input__text"
+        type="text"
+        placeholder="Subject"
+        formControlName="subject">
+    </div>
+
+    <div class="contact-form__input">
+      <textarea
+        class="contact-form__input__area"
+        type="text"
+        placeholder="Message"
+        formControlName="message">
+      </textarea>
+    </div>
+
+    <button class="contact-form__submit" type="submit">
+      Send
+    </button>
+    
+  </form>
+</section>
