@@ -5,49 +5,141 @@
         background-color: var(--col-beige-lightest);
         display: flex;
         flex-direction: column;
-        padding: 2rem 1rem;
 
         -webkit-box-shadow: 0 -0.5rem 1rem 1rem #00000010;
         -moz-box-shadow:    0 -0.5rem 1rem 1rem #00000010;
         box-shadow:         0 -0.5rem 1rem 1rem #00000010;
 
-        .contact-form__input {
+        .contract__description {
+            background-color: var(--col-grey-lightest);
+            border-bottom: 1px solid var(--col-border-light);
+            color: var(--col-grey-darker);
+            padding: 2rem 1.5rem;
+        }
+
+        .contract__input-wrapper {
             
-            display: flex;
-            flex-direction: column;
-            padding: 0.5rem 0;
+            padding: 0.5rem 1rem 1rem 1rem;
 
-            .contact-form__input__text {
-                background-color: var(--col-grey-lighter);
-                border: none;
-                border-radius: 0.25rem;
-                font-size: 1rem;
-                padding: 0.75rem 1.5rem;
-            }
+            .contact-form__input {
+                
+                display: flex;
+                flex-direction: column;
+                padding: 0.5rem 0;
 
-            .contact-form__input__area {
-                background-color: var(--col-grey-lighter);
-                border: none;
-                border-radius: 0.25rem;
-                font-size: 1rem;
-                height: 6rem;
-                margin-bottom: 0.5rem;
-                padding: 0.75rem 1.5rem;
-                resize: none;
+                .contact-form__input__text {
+                    background-color: var(--col-grey-lighter);
+                    border: none;
+                    border-bottom: 0.25rem solid var(--col-blue-lighter);
+                    border-radius: 0.25rem;
+                    font-size: 1rem;
+                    padding: 0.75rem 1.5rem;
+                    transition: border-bottom 0.5s;
+                }
+
+                .contact-form__input__area {
+                    background-color: var(--col-grey-lighter);
+                    border: none;
+                    border-bottom: 0.25rem solid var(--col-blue-lighter);
+                    border-radius: 0.25rem;
+                    font-size: 1rem;
+                    height: 6rem;
+                    margin-bottom: 0.5rem;
+                    padding: 0.75rem 1.5rem;
+                    resize: none;
+                    transition: border-bottom 0.5s;
+                }
+
+                .contact-form__input__text:focus,
+                .contact-form__input__area:focus {
+                    border-bottom: 0.25rem solid var(--col-succes);
+                }
             }
         }
 
         .contact-form__submit {
+
+            align-items: center;
             background-color: var(--col-blue-darker);
             border: none;
-            border-radius: 0.25rem;
             color: var(--col-beige-lightest);
+            display: flex;
             font-size: 1rem;
-            padding: 0.5rem 1.5rem;
+            justify-content: center;
+            transition: background-color 0.2s;
+            padding: 0.75rem 1.5rem;
+
+            .contact-form__submit__icon {
+                margin-right: 1rem;
+            }
+        }
+
+        .contact-form__submit:hover {
+            background-color: var(--col-blue-darkest);
+            cursor: pointer;
+        }
+
+        .disabled,
+        .disabled:hover {
+            background-color: var(--col-grey-medium);
+            cursor: default;
         }
     }
 }
 
 @media screen and (min-width: 640px) {
 
+    .contact {
+
+        background: var(--col-blue-desaturated) url('assets/gfx/scape[2].png');
+        background-position: bottom;
+        background-repeat: no-repeat;
+        background-size: 100% auto;
+        height: 16rem;
+        padding-top: 4rem;
+        position: relative;
+
+        -webkit-box-shadow: 0 0 1rem 0.5rem #00000020;
+        -moz-box-shadow:    0 0 1rem 0.5rem #00000020;
+        box-shadow:         0 0 1rem 0.5rem #00000020;
+
+        .contact-form {
+
+            border-radius: 1rem;
+            padding: 0;
+            overflow: hidden;
+            position: absolute;
+            left: 50%;
+            width: 40%;
+
+            -webkit-box-shadow: 0 0 1rem 0.25rem #00000020;
+            -moz-box-shadow:    0 0 1rem 0.25rem #00000020;
+            box-shadow:         0 0 1rem 0.25rem #00000020;
+
+            .contract__input-wrapper {
+
+                .contact-form__input__text {
+                    background-color: var(--col-grey-lighter);
+                    border: none;
+                    border-radius: 0.25rem;
+                    font-size: 1rem;
+                    padding: 0.75rem 1.5rem;
+                }
+
+                .contact-form__input__area {
+                    background-color: var(--col-grey-lighter);
+                    border: none;
+                    border-radius: 0.25rem;
+                    font-size: 1rem;
+                    height: 6rem;
+                    padding: 0.75rem 1.5rem;
+                    resize: none;
+                }
+            }
+
+            .contact-form__submit {
+                padding: 1rem 1.5rem !important;
+            }
+        }
+    }
 }

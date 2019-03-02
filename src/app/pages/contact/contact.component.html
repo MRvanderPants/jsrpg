@@ -2,40 +2,54 @@
 
   <form id="contact-form" class="contact-form" [formGroup]="contactForm" (ngSubmit)="submit()">
 
-    <div class="contact-form__input">
-      <input
-        class="contact-form__input__text"
-        type="text"
-        placeholder="Name"
-        formControlName="name">
+    <div class="contract__description">
+      If you'd like to contact me, the easiest way to do so is via this form. Your message will be send to me directly per mail, and I will get back to you as soon as possible.
     </div>
 
-    <div class="contact-form__input">
-      <input
-        class="contact-form__input__text"
-        type="text"
-        placeholder="E-mail"
-        formControlName="email">
+    <div class="contract__input-wrapper">
+
+      <div class="contact-form__input">
+        <input
+          class="contact-form__input__text"
+          type="text"
+          placeholder="Name*"
+          formControlName="name">
+      </div>
+
+      <div class="contact-form__input">
+        <input
+          class="contact-form__input__text"
+          type="text"
+          placeholder="E-mail*"
+          formControlName="email">
+      </div>
+
+      <div class="contact-form__input">
+        <input
+          class="contact-form__input__text"
+          type="text"
+          placeholder="Subject"
+          formControlName="subject">
+      </div>
+
+      <div class="contact-form__input">
+        <textarea
+          class="contact-form__input__area"
+          type="text"
+          placeholder="Message*"
+          formControlName="message">
+        </textarea>
+      </div>
+
     </div>
 
-    <div class="contact-form__input">
-      <input
-        class="contact-form__input__text"
-        type="text"
-        placeholder="Subject"
-        formControlName="subject">
-    </div>
-
-    <div class="contact-form__input">
-      <textarea
-        class="contact-form__input__area"
-        type="text"
-        placeholder="Message"
-        formControlName="message">
-      </textarea>
-    </div>
-
-    <button class="contact-form__submit" type="submit">
+    <button
+      class="contact-form__submit"
+      [class.disabled]="false"
+      type="submit">
+        <i class="material-icons contact-form__submit__icon">
+          send
+        </i>
       Send
     </button>
     

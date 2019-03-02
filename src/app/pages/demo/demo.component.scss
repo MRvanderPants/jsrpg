@@ -1,0 +1,19 @@
+.demo__content {
+
+    background-color: var(--col-blue-darker);
+    border-top: 1rem solid var(--col-beige-lightest);
+    height: 20rem;
+    position: relative;
+    z-index: 1;
+
+    -webkit-box-shadow: 0 0 1rem 0.5rem #00000020;
+    -moz-box-shadow:    0 0 1rem 0.5rem #00000020;
+    box-shadow:         0 0 1rem 0.5rem #00000020;
+
+    .demo__content__title {
+
+        color: var(--col-beige-lightest);
+        font-family: 'Montserrat', sans-serif;
+        font-weight: normal;
+    }
+}

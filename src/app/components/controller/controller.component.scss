@@ -51,19 +51,6 @@
     }
 }
 
-.lower-border {
-
-    background-color: var(--col-white);
-    border-top: 1px solid var(--col-border);
-    height: 1rem;
-    position: relative;
-    z-index: 1;
-
-    -webkit-box-shadow: 0 -0.5rem 1rem 0 #00000015;
-    -moz-box-shadow:    0 -0.5rem 1rem 0 #00000015;
-    box-shadow:         0 -0.5rem 1rem 0 #00000015;
-}
-
 
 @media screen and (min-width: 640px) {
     

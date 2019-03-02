@@ -36,7 +36,7 @@ export class Classes {
         + 'portfolio of local game and -web  enthousiast '
         + 'of Sjoerd "MRvanderPants" van den Broek. Feel '
         + 'free to try your hand at programming an AI in '
-        + 'this game I created.'
+        + 'this short game.'
       );
     };
 
