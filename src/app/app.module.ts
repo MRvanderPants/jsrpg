@@ -3,11 +3,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { Interfaces } from './services/interface.service';
 import { Classes } from './services/classes.service';
 import { CharacterService } from './services/character.service';
 import { RoutingService } from './services/routing.service';
+import { DataService } from './services/data.service';
 
 import { DemoComponent } from './pages/demo/demo.component';
 import { ResumeComponent } from './pages/resume/resume.component';
@@ -42,13 +44,15 @@ import { HealthbarComponent } from './components/healthbar/healthbar.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [
     Interfaces,
     Classes,
     CharacterService,
-    RoutingService
+    RoutingService,
+    DataService
   ],
   bootstrap: [
     AppComponent

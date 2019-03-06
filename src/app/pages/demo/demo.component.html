@@ -1,7 +1,42 @@
 <app-controller></app-controller>
 
 <section class="demo__content">
+
     <h2 class="demo__content__title">
         So it's a game, what's so special about it?
     </h2>
+
+    <div class="demo__content__panel">
+        <div class="demo__content__panel__content">
+            <h3 class="demo__content__panel__title">
+                1. Scoped javascript
+            </h3>
+            <div class="demo__content__panel__description">
+                Off course, having users execute code in your application can be dangerous, so I enclosed the scope of the textarea code to make sure the only properties that can be reached are the once I want.
+            </div>
+        </div>
+    </div>
+
+    <div class="demo__content__panel">
+        <div class="demo__content__panel__content">
+            <h3 class="demo__content__panel__title">
+                2. Run-time code execution
+            </h3>
+            <div class="demo__content__panel__description">
+                One of the bigger challenges was to execute user-generated lines of code, especially in combination with the javascript scoping. The textarea code gets wrapped up in a closed function to execute the code and scope it at the same time.
+            </div>
+        </div>
+    </div>
+
+    <div class="demo__content__panel">
+        <div class="demo__content__panel__content">
+            <h3 class="demo__content__panel__title">
+                3. Prepared AI
+            </h3>
+            <div class="demo__content__panel__description">
+                So how much fun would it be to battle it out with an enemy that doesn't fight back? Not very much. So I had to develop an AI that was both very robust as well as very versitile to account for all possible user-generate code.
+            </div>
+        </div>
+    </div>
+
 </section>

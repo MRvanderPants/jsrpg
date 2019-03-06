@@ -3,7 +3,7 @@
     .resume__hero {
 
         align-items: center;
-        background: var(--col-blue-darker) url('assets/gfx/scape[1].png');
+        background: var(--col-blue-darker) url('/assets/gfx/scape[1].png');
         background-position: bottom;
         background-repeat: no-repeat;
         background-size: auto 100%;
@@ -16,7 +16,7 @@
 
             background-color: #00000050;
             border-radius: 0.5rem;
-            color: var(--col-beige-lightest);
+            color: var(--col-white);
             font-family: 'Montserrat', sans-serif;
             font-size: 1.5rem;
             font-weight: normal;
@@ -40,6 +40,28 @@
     .resume__content {
 
         padding: 2rem 1rem;
+        position: relative;
+
+        .resume__content__download {
+            
+            align-items: center;
+            background-color: var(--col-blue);
+            border-radius: 3rem;
+            color: #efefef;
+            display: flex;
+            height: 3rem;
+            justify-content: center;
+            position: absolute;
+            right: 1.5rem;
+            top: -1.5rem;
+            transition: all 0.2s;
+            width: 3rem;
+            z-index: 999;
+    
+            -webkit-box-shadow: 0 0.25rem 1rem 0.25rem #00000033;
+            -moz-box-shadow:    0 0.25rem 1rem 0.25rem #00000033;
+            box-shadow:         0 0.25rem 1rem 0.25rem #00000033;
+        }
 
         .resume__content__line {
             color: var(--col-grey-medium);
@@ -99,7 +121,7 @@
 
                 .resume__item__block {
 
-                    background-color: var(--col-beige-lightest);
+                    background-color: var(--col-white);
                     border-radius: 1rem;
                     margin: 1rem 1rem 0 0;
                     overflow: hidden;

@@ -1,26 +1,38 @@
 <section class="contact">
 
-  <form id="contact-form" class="contact-form" [formGroup]="contactForm" (ngSubmit)="submit()">
+  <form
+    id="contact-form"
+    class="contact-form"
+    [formGroup]="contactForm"
+    (ngSubmit)="submit()">
 
-    <div class="contract__description">
+    <input type="hidden" name="check" value="" formControlName="check1" />
+
+    <div class="contract__description" *ngIf="!messageSend">
       If you'd like to contact me, the easiest way to do so is via this form. Your message will be send to me directly per mail, and I will get back to you as soon as possible.
     </div>
 
-    <div class="contract__input-wrapper">
+    <div class="contract__input-wrapper" *ngIf="!messageSend">
 
-      <div class="contact-form__input">
-        <input
-          class="contact-form__input__text"
-          type="text"
-          placeholder="Name*"
-          formControlName="name">
+      <div
+        class="contact-form__error"
+        *ngIf="errorMessage && errorMessage.length > 0">
+        {{ errorMessage }}
       </div>
 
       <div class="contact-form__input">
         <input
           class="contact-form__input__text"
           type="text"
-          placeholder="E-mail*"
+          placeholder="Name *"
+          formControlName="name">
+      </div>
+
+      <div class="contact-form__input">
+        <input
+          class="contact-form__input__text"
+          type="email"
+          placeholder="E-mail *"
           formControlName="email">
       </div>
 
@@ -33,20 +45,33 @@
       </div>
 
       <div class="contact-form__input">
+          <input
+            class="contact-form__input__text"
+            type="text"
+            placeholder="Complete: MRvander..... *"
+            formControlName="check2">
+        </div>
+
+      <div class="contact-form__input">
         <textarea
           class="contact-form__input__area"
           type="text"
-          placeholder="Message*"
+          placeholder="Message *"
           formControlName="message">
         </textarea>
       </div>
+    </div>
 
+    <div class="contract__succesMessage" *ngIf="messageSend">
+      Your message was succesfully send. I'll try to answer as soon as possible.
     </div>
 
     <button
       class="contact-form__submit"
-      [class.disabled]="false"
-      type="submit">
+      [class.disabled]="!contactForm.valid"
+      [disabled]="!contactForm.valid"
+      type="submit"
+      *ngIf="!messageSend">
         <i class="material-icons contact-form__submit__icon">
           send
         </i>
@@ -54,4 +79,25 @@
     </button>
     
   </form>
+
+  <div class="contact__socials">
+
+    <span class="contact__socials__title">Or follow me on one of the follow socials:</span>
+
+    <a href="https://twitter.com/mrvanderpants" target="_blank">
+      <div class="contact__socials__item">
+        <img class="contact__socials__item__icon" src="assets/gfx/twitter.svg" />
+        <span class="contact__socials__item__label">Twitter</span>
+      </div>
+    </a>
+
+    <a href="https://pinterest.com/mrvanderpants/" target="_blank">
+      <div class="contact__socials__item">
+        <img class="contact__socials__item__icon" src="assets/gfx/pinterest.svg" />
+        <span class="contact__socials__item__label">Pinterest</span>
+      </div>
+    </a>
+
+  </div>
+
 </section>
