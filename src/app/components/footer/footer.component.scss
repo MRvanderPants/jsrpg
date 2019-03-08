@@ -1,0 +1,17 @@
+.footer {
+
+    background-color: var(--col-grey-lighter);
+    padding: 0.5rem 1rem;
+    position: relative;
+    width: calc(100% - 2rem);
+    z-index: 1;
+
+    .footer__title {
+        color: var(--col-grey-medium);
+        display: block;
+        font-family: var(--font-title), sans-serif;
+        font-size: 0.9rem;
+        text-align: center;
+        width: 100%;
+    }
+}

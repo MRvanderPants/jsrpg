@@ -63,6 +63,10 @@
             box-shadow:         0 0.25rem 1rem 0.25rem #00000033;
         }
 
+        .resume__content__download:hover {
+            background-color: var(--col-blue-darker);
+        }
+
         .resume__content__line {
             color: var(--col-grey-medium);
             padding: 0.5rem 0;

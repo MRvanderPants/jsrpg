@@ -12,7 +12,7 @@
 
         .contract__description {
             background-color: var(--col-grey-lightest);
-            border-bottom: 1px solid var(--col-border-light);
+            border-left: 1px solid var(--col-border-light);
             color: var(--col-grey-darker);
             padding: 2rem 1.5rem;
         }
@@ -37,18 +37,18 @@
                 .contact-form__input__text {
                     background-color: var(--col-grey-lighter);
                     border: none;
-                    border-bottom: 0.25rem solid var(--col-blue-lighter);
+                    border-left: 0.25rem solid var(--col-blue-lighter);
                     border-radius: 0.25rem;
                     font-size: 1rem;
                     outline: none;
                     padding: 0.75rem 1.5rem;
-                    transition: border-bottom 0.5s;
+                    transition: border-left 0.5s;
                 }
 
                 .contact-form__input__area {
                     background-color: var(--col-grey-lighter);
                     border: none;
-                    border-bottom: 0.25rem solid var(--col-blue-lighter);
+                    border-left: 0.25rem solid var(--col-blue-lighter);
                     border-radius: 0.25rem;
                     font-size: 1rem;
                     height: 6rem;
@@ -56,12 +56,12 @@
                     outline: none;
                     padding: 0.75rem 1.5rem;
                     resize: none;
-                    transition: border-bottom 0.5s;
+                    transition: border-left 0.5s;
                 }
 
                 .contact-form__input__text:focus,
                 .contact-form__input__area:focus {
-                    border-bottom: 0.25rem solid var(--col-succes);
+                    border-left: 0.25rem solid var(--col-succes);
                 }
             }
         }
@@ -112,6 +112,7 @@
         .contact__socials__title {
             color: var(--col-white);
             display: flex;
+            font-family: var(--font-title), sans-serif;
             padding: 2rem 1rem 1rem 1rem;
         }
 
@@ -149,82 +150,95 @@
 
 @media screen and (min-width: 640px) {
 
-    .contact {
+    .contact__wrapper {
 
-        background: var(--col-blue-desaturated) url('/assets/gfx/scape[1].png');
-        background-position: bottom;
-        background-repeat: no-repeat;
-        background-size: 100% auto;
-        height: 16rem;
-        padding-top: 4rem;
-        position: relative;
+        display: flex;
+        flex-direction: column;
 
-        -webkit-box-shadow: 0 0 1rem 0.5rem #00000020;
-        -moz-box-shadow:    0 0 1rem 0.5rem #00000020;
-        box-shadow:         0 0 1rem 0.5rem #00000020;
+        .contact {
 
-        .contact-form {
+            background: var(--col-blue-desaturated) url('/assets/gfx/scape[1].png');
+            background-position: bottom;
+            background-repeat: no-repeat;
+            background-size: 100% auto;
+            display: flex;
+            flex-direction: row-reverse;
+            height: 16rem;
+            justify-content: space-between;
+            padding-top: 4rem;
+            position: relative;
 
-            border-radius: 1rem;
-            margin-bottom: 2rem;
-            overflow: hidden;
-            padding: 0;
-            position: absolute;
-            left: 50%;
-            width: 40%;
+            -webkit-box-shadow: 0 0 1rem 0.5rem #00000020;
+            -moz-box-shadow:    0 0 1rem 0.5rem #00000020;
+            box-shadow:         0 0 1rem 0.5rem #00000020;
 
-            -webkit-box-shadow: 0 0 1rem 0.25rem #00000020;
-            -moz-box-shadow:    0 0 1rem 0.25rem #00000020;
-            box-shadow:         0 0 1rem 0.25rem #00000020;
+            .contact-form {
 
-            .contract__input-wrapper {
+                border-radius: 1rem;
+                height: fit-content;
+                margin: 0 2rem 2rem 0;
+                overflow: hidden;
+                padding: 0;
+                width: 40%;
 
-                .contact-form__input__text {
-                    background-color: var(--col-grey-lighter);
-                    border: none;
-                    border-radius: 0.25rem;
-                    font-size: 1rem;
-                    padding: 0.75rem 1.5rem;
+                -webkit-box-shadow: 0 0 1rem 0.25rem #00000020;
+                -moz-box-shadow:    0 0 1rem 0.25rem #00000020;
+                box-shadow:         0 0 1rem 0.25rem #00000020;
+
+                .contract__input-wrapper {
+
+                    .contact-form__input__text {
+                        background-color: var(--col-grey-lighter);
+                        border: none;
+                        border-radius: 0.25rem;
+                        font-size: 1rem;
+                        padding: 0.75rem 1.5rem;
+                    }
+
+                    .contact-form__input__area {
+                        background-color: var(--col-grey-lighter);
+                        border: none;
+                        border-radius: 0.25rem;
+                        font-size: 1rem;
+                        height: 6rem;
+                        padding: 0.75rem 1.5rem;
+                        resize: none;
+                    }
                 }
 
-                .contact-form__input__area {
-                    background-color: var(--col-grey-lighter);
-                    border: none;
-                    border-radius: 0.25rem;
-                    font-size: 1rem;
-                    height: 6rem;
-                    padding: 0.75rem 1.5rem;
-                    resize: none;
+                .contact-form__submit {
+                    padding: 1rem 1.5rem !important;
                 }
             }
 
-            .contact-form__submit {
-                padding: 1rem 1.5rem !important;
+            .contact__socials {
+
+                background-color: unset;
+                margin: 16rem 0 0 2rem;
+                width: calc(50% - 1rem);
+
+                .contact__socials__title {
+                    color: var(--col-grey-medium);
+                    display: block;
+                    position: relative;
+                    margin-bottom: 2rem;
+                }
+
+                .contact__socials__title:after {
+                    background-color: var(--col-yellow);
+                    bottom: 0.25rem;
+                    content: '';
+                    display: block;
+                    height: 0.25rem;
+                    position: absolute;
+                    width: 2.5rem;
+                }
             }
         }
 
-        .contact__socials {
-
-            background-color: unset;
-            margin-top: 16rem;
-            width: calc(50% - 1rem);
-
-            .contact__socials__title {
-                color: var(--col-grey-medium);
-                display: block;
-                position: relative;
-                margin-bottom: 2rem;
-            }
-
-            .contact__socials__title:after {
-                background-color: var(--col-yellow);
-                bottom: 0.25rem;
-                content: '';
-                display: block;
-                height: 0.25rem;
-                position: absolute;
-                width: 2.5rem;
-            }
+        .contact__filler {
+            flex-grow: 1;
+            height: 55vh;
         }
     }
 }
