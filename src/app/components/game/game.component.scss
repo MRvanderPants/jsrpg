@@ -22,6 +22,19 @@
         margin-bottom: 2.5rem;
         width: 80%;
     }
+
+    .game__wrapper::after {
+
+        background: url('/assets/gfx/platform.png');
+        background-repeat: no-repeat;
+        background-position: bottom;
+        bottom: -0.5rem;
+        content: '';
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
 }
 
 @media screen and (min-width: 640px) {
