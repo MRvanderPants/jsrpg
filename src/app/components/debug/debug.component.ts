@@ -47,7 +47,7 @@ export class DebugComponent implements OnInit {
   /**
    * Clears the debugger content
    */
-  private onClear (): void {
+  public onClear (): void {
     this.clear.emit();
   }
 

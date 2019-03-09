@@ -271,7 +271,7 @@ export class ControllerComponent implements OnInit {
               url: '/assets/player/spr_fencer_hit_strip4.png',
               width: 120,
               speed: 10,
-              mirror: (character.id === 'player') ? true : false;
+              mirror: (character.id === 'player') ? true : false
             };
 
             const other = (character.id === 'player')
