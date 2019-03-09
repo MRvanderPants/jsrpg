@@ -20,19 +20,35 @@ export class ControllerComponent implements OnInit {
   public openedTab: boolean;
 
   private attackingCharacters: Array<any>;
+  private disableFirstReset: boolean;
 
   constructor() {
+
     this.logs = [];
     this.attackingCharacters = [];
     this.largeScreen = window.innerWidth >= 640;
     this.openedTab = false;
+    this.disableFirstReset = true;
   }
 
   ngOnInit() {
+    this.startGame('', false);
+  }
+
+
+  /**
+   * Starts a new game
+   * @param { string } data
+   * @param { boolean } startLoop
+   */
+  public startGame (data: string, startLoop: boolean): void {
 
     window['p'] =  CharacterService.generateCharacter('player', Helper.generateStats());
     window['e'] =  CharacterService.generateCharacter('enemy', Helper.generateStats());
-    window['d'] =  Classes.generateDebugger(this);
+
+    if (!window['d']) {
+      window['d'] =  Classes.generateDebugger(this);
+    }
 
     window['listeners'] = [{
       id: 'attack',
@@ -43,21 +59,18 @@ export class ControllerComponent implements OnInit {
     this.enemy = window['e'];
     this.debug = window['d'];
 
-    console.log(this.player, this.player.getStats(), this.enemy.getStats());
-  }
-
-
-  /**
-   * Starts a new game
-   */
-  public startGame (): void {
-    this.player.health = this.player.maxHealth;
+    // Start the game loop
+    if (startLoop) {
+      this.debug.clear();
+      this.executeLoop(data);
+    }
   }
 
 
   /**
    * Pushes a log to the debugger component
-   * @param { string } log
+   * @param { string } time
+   * @param { Array<string> } log
    */
   public pushLog (time: string, logs: Array<string>): void {
 
@@ -65,6 +78,7 @@ export class ControllerComponent implements OnInit {
       time: time,
       logs: logs.join(', ')
     });
+    this.logs = this.logs.slice();
   }
 
 
@@ -82,7 +96,7 @@ export class ControllerComponent implements OnInit {
    */
   public executeLoop (data: string): void {
 
-    // this.debug.clear();
+    this.attackingCharacters = [];
 
     // Let the AI decide their turn
     this.enemy._resolveTurn({
@@ -90,15 +104,7 @@ export class ControllerComponent implements OnInit {
       value: this.player
     });
 
-    // Execute the player defined script
-    const newScript = document.createElement('script');
-    newScript.innerHTML = `
-      function f (player, enemy, debug) {
-      var window = null, document = null;
-      ${ data }
-      }; new f(window.p, window.e.getStats(), window.d);`;
-    document.body.appendChild(newScript);
-    newScript.parentNode.removeChild(newScript);
+    this.executeScript(data);
     this.disabled = true;
 
     // Handle possible attacks this round
@@ -121,6 +127,15 @@ export class ControllerComponent implements OnInit {
     else {
       this.debug.log('The game has ended');
       this.disabled = false;
+
+      // Limit the health to zero is no more health
+      if (playerDefeated) {
+        this.debug.log('The player was defeated');
+      }
+
+      if (enemyDefeated) {
+        this.debug.log('The enemy was defeated');
+      }
     }
   }
 
@@ -142,6 +157,13 @@ export class ControllerComponent implements OnInit {
       const _attack = (index: number) => {
 
         const character = this.attackingCharacters[index];
+
+        // Check if the player has enough health to attack
+        if (character.getStats().health <= 0) {
+          this.resolveTurn(data);
+          return;
+        }
+
         this.debug.log(`${ character.id } attacked!`);
         this.attack(character);
         index++;
@@ -157,6 +179,15 @@ export class ControllerComponent implements OnInit {
         }, 1000);
       };
       _attack(0);
+    }
+
+    // Decide blocking units
+    if (this.attackingCharacters.indexOf(this.player) === -1) {
+      this.debug.log(`player blocked!`);
+    }
+
+    if (this.attackingCharacters.indexOf(this.enemy) === -1) {
+      this.debug.log(`enemy blocked!`);
     }
   }
 
@@ -178,5 +209,22 @@ export class ControllerComponent implements OnInit {
         value: character.getStats().attack
       });
     }, 1000);
+  }
+
+
+  /**
+   * Executes a user script
+   */
+  private executeScript (data: any): void {
+
+    // Execute the player defined script
+    const newScript = document.createElement('script');
+    newScript.innerHTML = `
+      function f (player, enemy, debug) {
+      var window = null, document = null;
+      ${ data }
+      }; new f(window.p, window.e.getStats(), window.d);`;
+    document.body.appendChild(newScript);
+    newScript.parentNode.removeChild(newScript);
   }
 }

@@ -9,11 +9,16 @@ export class DebugComponent implements OnInit {
 
   @ViewChild('wrapper') wrapper;
 
-  @Input() logs: Array<string>;
+  @Input() set logs (val: Array<string>) {
+
+    this.lines = val;
+    this.scrollDown();
+  }
 
   @Output() clear: EventEmitter<void>;
 
   public isSplit: boolean;
+  public lines: Array<string>;
 
   constructor() {
     this.clear = new EventEmitter();
@@ -28,6 +33,20 @@ export class DebugComponent implements OnInit {
     });
   }
 
+
+  /**
+   * Scrolls the console down if needed
+   */
+  public scrollDown (): void {
+    setTimeout(() => {
+      this.wrapper.nativeElement.scrollTop = this.wrapper.nativeElement.scrollHeight;
+    });
+  }
+
+
+  /**
+   * Clears the debugger content
+   */
   private onClear (): void {
     this.clear.emit();
   }

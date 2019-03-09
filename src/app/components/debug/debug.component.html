@@ -1,6 +1,6 @@
 <div class="debugger__wrapper">
   <div #area class="debugger__content" #wrapper>
-    <div class="debugger__item" *ngFor="let log of logs">
+    <div class="debugger__item" *ngFor="let log of lines">
         <i class="debugger__item__item material-icons">arrow_forward_ios</i>
       <span class="debugger__item__time">{{ log.time }}: </span>
       <span class="debugger__item__message">{{ log.logs }}</span>

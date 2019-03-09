@@ -65,6 +65,10 @@ export class CharacterService {
                         else {
                             curStats.health -= damage;
                         }
+
+                        if (curStats.health < 0) {
+                            curStats.health = 0;
+                        }
                         break;
                     }
 
