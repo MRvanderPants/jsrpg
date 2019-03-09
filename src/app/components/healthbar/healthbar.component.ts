@@ -27,4 +27,22 @@ export class HealthbarComponent implements OnInit {
     const maxWidth = this.container.nativeElement.clientWidth;
     return (maxWidth * stats.health) / stats.maxHealth;
   }
+
+
+  /**
+   * Decides the colour of the healthbar
+   */
+  public getColour (): string {
+
+    const stats = this.character.getStats();
+    const perc = stats.health / stats.maxHealth;
+
+    if (perc >= 0.5) {
+      return 'green';
+    }
+    if (perc >= 0.25 && perc < 0.5) {
+      return 'yellow';
+    }
+    return 'red';
+  }
 }

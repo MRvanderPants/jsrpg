@@ -1,3 +1,3 @@
 <div #container class="healthbar" [class.mirrored]="isMirrored">
-  <div #fill class="healthbar__fill" [style.width.px]="getWidth()"></div>
+  <div #fill class="healthbar__fill {{ getColour() }}" [style.width.px]="getWidth()"></div>
 </div>
