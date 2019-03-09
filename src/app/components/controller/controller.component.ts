@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Classes } from '../../services/classes.service';
 import { CharacterService } from '../../services/character.service';
 import { CharacterStats } from '../../services/interface.service';
@@ -11,6 +11,8 @@ import { Helper } from '../../services/helper';
 })
 export class ControllerComponent implements OnInit {
 
+  @ViewChild('game') game: any;
+
   public logs: any;
   public disabled: boolean;
   public player: any;
@@ -21,6 +23,7 @@ export class ControllerComponent implements OnInit {
 
   private attackingCharacters: Array<any>;
   private disableFirstReset: boolean;
+  private animationCallback: any;
 
   constructor() {
 
@@ -29,6 +32,7 @@ export class ControllerComponent implements OnInit {
     this.largeScreen = window.innerWidth >= 640;
     this.openedTab = false;
     this.disableFirstReset = true;
+    this.animationCallback = null;
   }
 
   ngOnInit() {
@@ -68,6 +72,28 @@ export class ControllerComponent implements OnInit {
 
 
   /**
+   * Continue's the sequence when an animation finishes playing
+   * @param { string } target player / enemy
+   */
+  public continueFromAnimation(target: string): void {
+
+    const idleAnimation = {
+      url: '/assets/player/spr_fencer_idle_strip6.png',
+      width: 120,
+      speed: 160,
+      mirror: (target === 'player') ? false : true
+    };
+
+    this.game.setAnimation(target, idleAnimation);
+
+    if (this.animationCallback) {
+      this.animationCallback();
+      this.animationCallback = null;
+    }
+  }
+
+
+  /**
    * Pushes a log to the debugger component
    * @param { string } time
    * @param { Array<string> } log
@@ -102,13 +128,14 @@ export class ControllerComponent implements OnInit {
     this.enemy._resolveTurn({
       id: 'decide',
       value: this.player
+    }).then(() => {
+
+      this.executeScript(data);
+      this.disabled = true;
+
+      // Handle possible attacks this round
+      this.parseAttackingCharacters(data);
     });
-
-    this.executeScript(data);
-    this.disabled = true;
-
-    // Handle possible attacks this round
-    this.parseAttackingCharacters(data);
   }
 
 
@@ -165,29 +192,42 @@ export class ControllerComponent implements OnInit {
         }
 
         this.debug.log(`${ character.id } attacked!`);
-        this.attack(character);
-        index++;
+        this.attack(character).then(() => {
 
-        setTimeout(() => {
+          index++;
 
-          if (index < this.attackingCharacters.length) {
-            _attack(index);
-          }
-          else {
-            this.resolveTurn(data);
-          }
-        }, 1000);
+          setTimeout(() => {
+
+            if (index < this.attackingCharacters.length) {
+              _attack(index);
+            }
+            else {
+              this.resolveTurn(data);
+            }
+          }, 1000);
+        });
       };
       _attack(0);
     }
 
+    const blockingAnimation = {
+      url: '/assets/player/spr_fencer_parry_strip8.png',
+      width: 192,
+      speed: 10,
+      mirror: false
+    };
+
     // Decide blocking units
     if (this.attackingCharacters.indexOf(this.player) === -1) {
       this.debug.log(`player blocked!`);
+      blockingAnimation.mirror = false;
+      this.game.setAnimation('player', blockingAnimation);
     }
 
     if (this.attackingCharacters.indexOf(this.enemy) === -1) {
       this.debug.log(`enemy blocked!`);
+      blockingAnimation.mirror = true;
+      this.game.setAnimation('enemy', blockingAnimation);
     }
   }
 
@@ -195,20 +235,37 @@ export class ControllerComponent implements OnInit {
   /**
    * Parse an attack
    * @param { any } character
+   * @returns { Promise<void> }
    */
-  private attack (character: any): void {
+  private attack (character: any): Promise<void> {
 
-    setTimeout(() => {
+    return new Promise ((resolve) => {
 
       const target = (character.id === 'player')
         ? this.enemy
         : this.player;
 
-      target._resolveTurn({
-        id: 'damage',
-        value: character.getStats().attack
-      });
-    }, 1000);
+      const mirrored = character.id === 'enemy';
+
+      const attackAnimation = {
+        url: '/assets/player/spr_fencer_attack_strip9.png',
+        width: 192,
+        speed: 10,
+        mirror: mirrored
+      };
+
+      this.game.setAnimation(character.id, attackAnimation);
+
+      this.animationCallback = () => {
+
+        target._resolveTurn({
+          id: 'damage',
+          value: character.getStats().attack
+        }).then(() => {
+          resolve();
+        });
+      };
+    });
   }
 
 

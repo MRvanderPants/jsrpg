@@ -4,12 +4,14 @@
 
     <app-sprite
       [animation]="testPlayer"
-      [controller]="player">
+      [controller]="player"
+      (animationEnd)="animationDidEnd('player')">
     </app-sprite>
     
     <app-sprite
       [animation]="testEnemy"
-      [controller]="enemy">
+      [controller]="enemy"
+      (animationEnd)="animationDidEnd('enemy')">
     </app-sprite>
 
   </div>

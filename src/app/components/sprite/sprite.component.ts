@@ -10,28 +10,42 @@ export class SpriteComponent implements OnInit {
 
   @ViewChild('sprite') sprite;
 
-  @Input() animation: SpriteAnimation;
+  @Input() set animation(anim: SpriteAnimation) {
+    this.curAnimation = anim;
+    this.adjustAnimation = true;
+  }
+
   @Input() controller: any;
 
   @Output() animationEnd: EventEmitter<SpriteAnimation>;
 
   public spriteWidth: number;
   public spriteIndex: number;
+  public curAnimation: SpriteAnimation;
 
   private spriteDOM: any;
+  private adjustAnimation: boolean;
 
   constructor() {
     this.animationEnd = new EventEmitter();
+    this.adjustAnimation = false;
   }
 
   ngOnInit() {
+    this.startAnimation();
+    window.setInterval(() => { this.animate(); }, this.curAnimation.speed);
+  }
+
+
+  /**
+   * Stats a certain animation
+   */
+  private startAnimation (): void {
 
     this.spriteIndex = 0;
-    this.spriteWidth = this.findSpriteCount();
     this.spriteDOM = this.sprite.nativeElement;
-    this.spriteDOM.style.backgroundImage = `url('${this.animation.url}')`;
-
-    window.setInterval(() => { this.animate(); }, this.animation.speed);
+    this.spriteDOM.style.backgroundImage = `url('${this.curAnimation.url}')`;
+    this.spriteWidth = this.findSpriteCount();
   }
 
 
@@ -40,13 +54,25 @@ export class SpriteComponent implements OnInit {
    */
   private animate (): void {
 
-    const x = this.spriteIndex * this.animation.width;
+    if(this.adjustAnimation) {
+      this.startAnimation();
+      this.adjustAnimation = false;
+    }
+
+    const x = this.spriteIndex * this.curAnimation.width;
     this.spriteDOM.style.backgroundPosition = `${x}px 0`;
     this.spriteIndex++;
 
     if (this.spriteIndex >= this.spriteWidth) {
       this.spriteIndex = 0;
-      this.animationEnd.emit(this.animation);
+
+      const exceptions = [
+        '/assets/player/spr_fencer_idle_strip6.png'
+      ];
+
+      if (exceptions.indexOf(this.curAnimation.url) === -1) {
+        this.animationEnd.emit(this.curAnimation);
+      }
     }
   }
 
@@ -57,7 +83,7 @@ export class SpriteComponent implements OnInit {
    */
   private findSpriteCount (): number {
 
-    const strip = this.animation.url.match(/strip[\d]/);
+    const strip = this.curAnimation.url.match(/strip[\d]/);
     const index = strip[0].match(/[\d]/)[0];
     return parseInt(index);
   }

@@ -1,6 +1,8 @@
 <app-game
+    #game
     [player]="player"
-    [enemy]="enemy">
+    [enemy]="enemy"
+    (animationEnd)="continueFromAnimation($event)">
 </app-game>
 
 <div class="tabs">

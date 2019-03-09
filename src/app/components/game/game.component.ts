@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { SpriteAnimation } from '../../services/interface.service';
 
 @Component({
@@ -7,6 +7,8 @@ import { SpriteAnimation } from '../../services/interface.service';
   styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements OnInit {
+
+  @Output() animationEnd: EventEmitter<string>;
 
   @Input() player;
   @Input() enemy;
@@ -19,6 +21,8 @@ export class GameComponent implements OnInit {
   public turnIndex: number;
 
   constructor() {
+
+    this.animationEnd = new EventEmitter();
 
     this.testPlayer = {
       url: '/assets/player/spr_fencer_idle_strip6.png',
@@ -37,6 +41,32 @@ export class GameComponent implements OnInit {
 
   ngOnInit() {
     this.createGame();
+  }
+
+
+  /**
+   * Triggers once an sprite animation ends
+   * @param { string } target player/ enemy
+   */
+  public animationDidEnd (target: string): void {
+    this.animationEnd.emit(target);
+  }
+
+
+  /**
+   * Plays a certain animation on a unit
+   * @param { string } target
+   * @param { SpriteAnimation } animation 
+   */
+  public setAnimation (target: string, animation: SpriteAnimation) {
+
+    if (target === 'player') {
+      this.testPlayer = animation;
+    }
+
+    if (target === 'enemy') {
+      this.testEnemy = animation;
+    }
   }
 
 

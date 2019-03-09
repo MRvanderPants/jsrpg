@@ -49,58 +49,64 @@ export class CharacterService {
             /**
              * Helper function to resolve turns to the player from outside this class
              * @param { TurnData } turnData
+             * @returns { Promise <void> }
              */
-            this._resolveTurn = function (turnData: TurnData) {
+            this._resolveTurn = function (turnData: TurnData): Promise<void> {
 
-                switch (turnData.id) {
+                return new Promise ((resolve) => {
 
-                    case 'damage': {
+                    switch (turnData.id) {
 
-                        // Calculate the damge, or healing when blocking
-                        let damage = turnData.value;
-                        if (curMove === 'defend') {
-                            damage -= curStats.defence;
-                            curStats.health += damage;
-                        }
-                        else {
-                            curStats.health -= damage;
-                        }
+                        case 'damage': {
 
-                        if (curStats.health < 0) {
-                            curStats.health = 0;
-                        }
-                        break;
-                    }
-
-                    // Let the enemy AI decide what to do
-                    case 'decide': {
-
-                        const playerStats = turnData.value.getStats();
-
-                        if (curStats.speed > playerStats.speed) { // If faster
-
-                            const midHealth = Math.round(curStats.maxHealth / 2);
-                            if (curStats.health > midHealth) { // If healthy, just attack
-                                this.attack();
-                            }
-                            else { // If unhealthy, 33/66 decide to attack/ block
-                                const r = Math.random();
-                                (r < 0.33)
-                                    ? this.attack()
-                                    : this.defend();
-                            }
-                        }
-                        else { // If slower, be more carefull
-
-                            if (playerStats.attack < curStats.health) { // If surviving, attack
-                                this.attack();
+                            // Calculate the damge, or healing when blocking
+                            let damage = turnData.value;
+                            if (curMove === 'defend') {
+                                damage -= curStats.defence;
+                                curStats.health += damage;
                             }
                             else {
-                                this.defend();
+                                curStats.health -= damage;
                             }
+
+                            if (curStats.health < 0) {
+                                curStats.health = 0;
+                            }
+                            resolve();
+                            break;
+                        }
+
+                        // Let the enemy AI decide what to do
+                        case 'decide': {
+
+                            const playerStats = turnData.value.getStats();
+
+                            if (curStats.speed > playerStats.speed) { // If faster
+
+                                const midHealth = Math.round(curStats.maxHealth / 2);
+                                if (curStats.health > midHealth) { // If healthy, just attack
+                                    this.attack();
+                                }
+                                else { // If unhealthy, 33/66 decide to attack/ block
+                                    const r = Math.random();
+                                    (r < 0.33)
+                                        ? this.attack()
+                                        : this.defend();
+                                }
+                            }
+                            else { // If slower, be more carefull
+
+                                if (playerStats.attack < curStats.health) { // If surviving, attack
+                                    this.attack();
+                                }
+                                else {
+                                    this.defend();
+                                }
+                            }
+                            resolve();
                         }
                     }
-                }
+                });
             };
         };
 

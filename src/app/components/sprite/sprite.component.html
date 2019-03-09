@@ -1,9 +1,9 @@
 <div #sprite
     class="sprite"
-    [class.mirrored]="animation.mirror">
+    [class.mirrored]="curAnimation.mirror">
 
     <app-healthbar
         [character]="controller"
-        [isMirrored]="animation.mirror">
+        [isMirrored]="curAnimation.mirror">
     </app-healthbar>
 </div>
