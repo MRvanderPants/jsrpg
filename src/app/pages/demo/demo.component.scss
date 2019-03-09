@@ -1,3 +1,88 @@
+.demo__explaination {
+    
+    background-color: var(--col-blue-darker);
+    padding-bottom: 3rem;
+    position: relative;
+    z-index: 1;
+
+    -webkit-box-shadow: 0 0 1rem 0.5rem #00000020;
+    -moz-box-shadow:    0 0 1rem 0.5rem #00000020;
+    box-shadow:         0 0 1rem 0.5rem #00000020;
+
+    .demo__explaination__title {
+        
+        color: var(--col-white);
+        font-family: 'Montserrat', sans-serif;
+        font-weight: normal;
+        padding: 2rem 1rem 3rem 1rem;
+        position: relative;
+        width: calc(100% - 2rem);
+    }
+
+    .demo__explaination__title:after {
+        background-color: var(--col-yellow);
+        bottom: 1.5rem;
+        content: '';
+        display: block;
+        height: 0.25rem;
+        position: absolute;
+        width: 2.5rem;
+    }
+
+    .demo__explaination__description {
+        color: var(--col-white);
+        padding: 0 1rem 3rem 1rem;
+    }
+
+    .demo__explaination__panel {
+
+        padding: 1rem;
+
+        .demo__explaination__panel__explaination {
+
+            border-radius: 1rem;
+            border-left: 0.25rem solid var(--col-blue-lighter);
+            padding: 1rem;
+            overflow: hidden;
+
+            .demo__explaination__panel__title {
+
+                align-items: center;
+                color: var(--col-white);
+                display: flex;
+                font-family: 'Montserrat', sans-serif;
+                font-size: 1rem;
+                padding-bottom: 0.5rem;
+                position: relative;
+
+                .demo__explaination__panel__title__icon {
+                    color: var(--col-blue-lighter);
+                    padding-right: 1rem;
+                }
+            }
+
+            .demo__explaination__panel__description {
+
+                color: var(--col-white);
+                display: flex;
+                flex-direction: column;
+                font-size: 0.9rem;
+                padding: 0.5rem 0 1rem 0;
+
+                .demo__explaination__panel__description__item {
+
+                    display: flex;
+
+                    b {
+                        display: block;
+                        width: 4rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
 .demo__content {
 
     padding-bottom: 3rem;
@@ -71,11 +156,14 @@
 
 @media screen and (min-width: 640px) {
 
-    .demo__content {
+    .demo__content, .demo__explaination {
 
         padding-top: 2rem;
 
-        .demo__content__title {
+        .demo__content__title,
+        .demo__explaination__title,
+        .demo__explaination__description,
+        .demo__explaination__panel {
             margin: auto;
             width: var(--size-page) !important;
         }

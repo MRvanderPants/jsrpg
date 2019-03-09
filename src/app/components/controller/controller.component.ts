@@ -210,6 +210,7 @@ export class ControllerComponent implements OnInit {
       _attack(0);
     }
 
+    // Display a blocking animation if needed
     const blockingAnimation = {
       url: '/assets/player/spr_fencer_parry_strip8.png',
       width: 192,
