@@ -204,7 +204,7 @@ export class ControllerComponent implements OnInit {
             else {
               this.resolveTurn(data);
             }
-          }, 1000);
+          }, 500);
         });
       };
       _attack(0);
@@ -247,13 +247,13 @@ export class ControllerComponent implements OnInit {
 
       const mirrored = character.id === 'enemy';
 
+      // Set the attack animation
       const attackAnimation = {
         url: '/assets/player/spr_fencer_attack_strip9.png',
         width: 192,
         speed: 10,
         mirror: mirrored
       };
-
       this.game.setAnimation(character.id, attackAnimation);
 
       this.animationCallback = () => {
@@ -261,7 +261,25 @@ export class ControllerComponent implements OnInit {
         target._resolveTurn({
           id: 'damage',
           value: character.getStats().attack
-        }).then(() => {
+        }).then((response) => {
+
+          // Display an hit animation if damaged
+          if (response.type === 'damage' && response.curMove !== 'defend') {
+
+            const hitAnimation = {
+              url: '/assets/player/spr_fencer_hit_strip4.png',
+              width: 120,
+              speed: 10,
+              mirror: (character.id === 'player') ? true : false;
+            };
+
+            const other = (character.id === 'player')
+              ? 'enemy'
+              : 'player';
+
+            this.game.setAnimation(other, hitAnimation);
+          }
+
           resolve();
         });
       };

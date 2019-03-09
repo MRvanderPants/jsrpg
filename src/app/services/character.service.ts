@@ -51,7 +51,7 @@ export class CharacterService {
              * @param { TurnData } turnData
              * @returns { Promise <void> }
              */
-            this._resolveTurn = function (turnData: TurnData): Promise<void> {
+            this._resolveTurn = function (turnData: TurnData): Promise<any> {
 
                 return new Promise ((resolve) => {
 
@@ -72,7 +72,11 @@ export class CharacterService {
                             if (curStats.health < 0) {
                                 curStats.health = 0;
                             }
-                            resolve();
+                            resolve({
+                                type: 'damage',
+                                curMove: curMove,
+                                scope: this
+                            });
                             break;
                         }
 
@@ -103,7 +107,11 @@ export class CharacterService {
                                     this.defend();
                                 }
                             }
-                            resolve();
+                            resolve({
+                                type: 'damage',
+                                curMove: curMove,
+                                scope: this
+                            });
                         }
                     }
                 });
