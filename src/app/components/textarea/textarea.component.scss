@@ -53,20 +53,33 @@
             -moz-animation:spin 3s linear infinite;
             animation:spin 3s linear infinite;
         }
+
+        .stop {
+            display: none;
+        }
     }
 
     .textarea__submit:hover {
+        
         background-color: var(--col-blue-darker);
         cursor: pointer;
     }
 
     .disabled {
-        background-color: --col-grey-darker;
-        color: --col-grey-lightest;
+        background-color: var(--col-grey-darker);
+        color: var(--col-grey-lightest);
     }
 
     .disabled:hover {
-        background-color: --col-grey-darker;
-        color: --col-grey-lightest;
+        background-color: var(--col-danger);
+        color: var(--col-grey-lightest);
+
+        .textarea__submit__icon--animating {
+            display: none !important;
+        }
+
+        .stop {
+            display: block;
+        }
     }
 }

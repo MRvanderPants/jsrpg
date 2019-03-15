@@ -24,6 +24,7 @@ export class ControllerComponent implements OnInit {
   private attackingCharacters: Array<any>;
   private disableFirstReset: boolean;
   private animationCallback: any;
+  private stopCycle: boolean;
 
   constructor() {
 
@@ -33,6 +34,7 @@ export class ControllerComponent implements OnInit {
     this.openedTab = false;
     this.disableFirstReset = true;
     this.animationCallback = null;
+    this.stopCycle = false;
   }
 
   ngOnInit() {
@@ -68,6 +70,15 @@ export class ControllerComponent implements OnInit {
       this.debug.clear();
       this.executeLoop(data);
     }
+  }
+
+
+  /**
+   * Stops the situation
+   */
+  public stopGame (): void {
+    this.stopCycle = true;
+    this.disabled = false;
   }
 
 
@@ -144,6 +155,11 @@ export class ControllerComponent implements OnInit {
    * @param { string } data
    */
   private resolveTurn (data: string): void {
+
+    if (this.stopCycle) {
+      this.stopCycle = false;
+      return;
+    }
 
     const playerDefeated = this.player.getStats().health <= 0;
     const enemyDefeated = this.enemy.getStats().health <= 0;
@@ -229,6 +245,14 @@ export class ControllerComponent implements OnInit {
       this.debug.log(`enemy blocked!`);
       blockingAnimation.mirror = true;
       this.game.setAnimation('enemy', blockingAnimation);
+    }
+
+    // When both units block
+    if (this.attackingCharacters.indexOf(this.player) === -1
+    && this.attackingCharacters.indexOf(this.enemy) === -1) {
+
+        this.debug.log('Stalemate!');
+        // this.resolveTurn(data);
     }
   }
 

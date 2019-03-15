@@ -10,6 +10,7 @@ export class TextareaComponent implements OnInit {
   @ViewChild('area') area;
 
   @Output() execute: EventEmitter<string>;
+  @Output() stop: EventEmitter<void>;
 
   @Input() disabled: boolean;
 
@@ -17,6 +18,7 @@ export class TextareaComponent implements OnInit {
 
   constructor() {
     this.execute = new EventEmitter();
+    this.stop = new EventEmitter();
   }
 
   ngOnInit() {
@@ -36,6 +38,9 @@ export class TextareaComponent implements OnInit {
   public submit (): void {
     if (!this.disabled) {
       this.execute.emit(this.areaDOM.value);
+    }
+    else {
+      this.stop.emit();
     }
   }
 
