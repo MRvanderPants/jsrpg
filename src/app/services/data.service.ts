@@ -17,18 +17,6 @@ export class DataService {
    */
   public sendMail (formData: any): Promise <any> {
 
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
-
-    const body = new FormData();
-          body.append('check1', formData.check1);
-          body.append('check2', formData.check2);
-          body.append('email', formData.email);
-          body.append('message', formData.message);
-          body.append('name', formData.name);
-          body.append('subject', formData.subject);
-
     return new Promise ((resolve, reject) => {
 
       this.httpClient.get(
@@ -36,7 +24,7 @@ export class DataService {
       )
       .subscribe(
         data => resolve(data),
-        error => reject(error)
+        error => resolve(error.error.text)
       );
     });
   }

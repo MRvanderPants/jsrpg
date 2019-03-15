@@ -37,11 +37,8 @@ export class ContactComponent implements OnInit {
    * Event callback for the form submit event
    */
   public submit (): void {
-    console.log('TODO', this.contactForm.value);
 
     this.dataService.sendMail(this.contactForm.value).then((response) => {
-
-      console.log('response', response);
 
       switch (response) {
 

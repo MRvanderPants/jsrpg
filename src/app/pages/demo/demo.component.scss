@@ -20,7 +20,7 @@
     }
 
     .demo__explaination__title:after {
-        background-color: var(--col-yellow);
+        background-color: var(--col-yellow-medium);
         bottom: 1.5rem;
         content: '';
         display: block;
@@ -41,7 +41,7 @@
         .demo__explaination__panel__explaination {
 
             border-radius: 1rem;
-            border-left: 0.25rem solid var(--col-blue-lighter);
+            border-left: 0.25rem solid var(--col-blue-lightest);
             padding: 1rem;
             overflow: hidden;
 
@@ -56,7 +56,7 @@
                 position: relative;
 
                 .demo__explaination__panel__title__icon {
-                    color: var(--col-blue-lighter);
+                    color: var(--col-blue-lightest);
                     padding-right: 1rem;
                 }
             }
@@ -104,7 +104,7 @@
     }
 
     .demo__content__title:after {
-        background-color: var(--col-yellow);
+        background-color: var(--col-yellow-medium);
         bottom: 1.5rem;
         content: '';
         display: block;
