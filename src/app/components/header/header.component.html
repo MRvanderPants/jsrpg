@@ -1,5 +1,3 @@
-<div class="header__margin"></div>
-
 <div class="header">
 
   <div class="header__title__wrapper" (click)="activate(routes[0])">
@@ -13,9 +11,17 @@
     </h1>
 
   </div>
+</div>
 
-  <div class="header__nav">
+<div class="header__nav" [class.opened]="isOpen">
 
+  <div class="header__nav__button" (click)="toggleNav()">
+    <i class="header__nav__button__icon material-icons">
+      menu
+    </i>
+  </div>
+
+  <div class="header__nav__wrapper" *ngIf="isOpen">
     <div
       class="header__nav__item"
       *ngFor="let route of routes"
@@ -26,6 +32,6 @@
         {{ route.id }}
       </span>
     </div>
-
   </div>
+
 </div>

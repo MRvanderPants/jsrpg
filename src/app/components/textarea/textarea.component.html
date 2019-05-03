@@ -1,5 +1,12 @@
 <div class="textarea__wrapper">
-  <textarea #area class="textarea"></textarea>
+
+  <div class="textarea__wrapper__header">
+    <div class="textarea__wrapper__header__button red"></div>
+    <div class="textarea__wrapper__header__button yellow"></div>
+    <div class="textarea__wrapper__header__button green"></div>
+  </div>
+
+  <textarea #area class="textarea" spellcheck="false"></textarea>
 
   <div class="textarea__submit" (click)="submit()" [class.disabled]="disabled">
     <i class="material-icons textarea__submit__icon" *ngIf="!disabled">play_circle_outline</i>

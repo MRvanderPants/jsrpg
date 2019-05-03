@@ -5,26 +5,57 @@
 .textarea__wrapper {
 
     background-color: var(--ion-white);
+    border-radius: 0.5rem;
     margin-bottom: -0.3rem;
     position: relative;
     width: calc(100% - 0.25rem);
 
+    -webkit-box-shadow: 0 0.25rem 1rem 0.25rem #00000015;
+    -moz-box-shadow:    0 0.25rem 1rem 0.25rem #00000015;
+    box-shadow:         0 0.25rem 1rem 0.25rem #00000015;
+
+    .textarea__wrapper__header {
+
+        background-color: var(--col-grey);
+        border-radius: 0.5rem 0.5rem 0 0;
+        display: flex;
+        padding: 0 0.25rem;
+        position: relative;
+        width: calc(100% - 0.5rem);
+        z-index: 2;
+
+        .textarea__wrapper__header__button {
+
+            border-radius: 1rem;
+            border: 1px solid #dadada;
+            height: 0.75rem;
+            margin: 0.5rem 0.25rem;
+            width: 0.75rem;
+        }
+
+        .red { background-color: var(--col-danger); }
+        .yellow { background-color: var(--col-yellow); }
+        .green { background-color: var(--col-succes); }
+    }
+
     .textarea {
         
-        background-image: linear-gradient(var(--col-grey-lightest) 50%, var(--col-white) 50%);
+        background-image: linear-gradient(var(--col-white) 50%, var(--col-grey-lightest) 50%);
         background-size: 100% 3rem; // 2.1rem
         background-attachment: local;
         border: none;
+        border-radius: 0.5rem 0;
         color: var(--col-black);
         font-family: 'Source Code Pro', monospace;
         height: 17rem;
         line-height: 1.5rem;
         outline: none;
+        overflow: hidden;
         padding: 1.5rem 1rem 1rem 1rem;
         position: relative;
         resize: none;
         tab-size: 4;
-        width: calc(100% - 1.75rem);
+        width: calc(100% - 2rem);
         z-index: 1;
     }
 
@@ -39,7 +70,7 @@
         justify-content: center;
         position: absolute;
         right: 1.5rem;
-        top: -1.5rem;
+        top: -0.5rem;
         transition: all 0.2s;
         width: 3rem;
         z-index: 999;

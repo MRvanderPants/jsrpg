@@ -1,31 +1,51 @@
 .game {
 
-    align-items: flex-end;
-    background: var(--col-beige-lighter) url('/assets/gfx/scape[2].png');
+    align-items: center;
+    // background: var(--col-beige-lighter) url('/assets/gfx/scape[2].png');
     background-position: center bottom;
     background-repeat: no-repeat;
     background-size: auto 100%;
     display: flex;
-    height: 20rem;
-    justify-content: center;
-    margin-bottom: -2rem;
+    flex-direction: column;
+    height: 50vh;
+    justify-content: space-between;
+    margin: auto;
+    // margin-bottom: -2rem;
+    padding-bottom: 10vw;
+    padding: 0 4rem;
     position: relative;
-    width: 100%;
+    width: auto;
     z-index: -1;
+
+    .game__quote {
+
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 5rem;
+        width: 100%;
+
+        .game__quote__line {
+
+            color: var(--col-blue-darker);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+        }
+    }
 
     .game__wrapper {
 
         align-items: flex-end;
         display: flex;
-        height: 80%;
+        // height: 80%;
         justify-content: center;
-        margin-bottom: 2.5rem;
+        margin-bottom: 10rem;
         width: 80%;
     }
 
     .game__wrapper::after {
 
-        background: url('/assets/gfx/platform.png');
+        // background: url('/assets/gfx/platform.png');
         background-repeat: no-repeat;
         background-position: bottom;
         bottom: -4px;
@@ -40,6 +60,22 @@
 @media screen and (min-width: 640px) {
 
     .game {
+
+        align-items: flex-end;
         background-size: 100% auto;
+
+        .game__wrapper {
+            justify-content: flex-end;
+            margin-bottom: 0.5rem;
+        }
+
+        .game__quote {
+
+            margin-bottom: 0;
+
+            .game__quote__line {
+                font-size: 4rem;
+            }
+        }
     }
 }
