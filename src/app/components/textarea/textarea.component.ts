@@ -26,7 +26,16 @@ export class TextareaComponent implements OnInit {
     this.disabled = false;
 
     this.areaDOM = this.area.nativeElement;
-    this.areaDOM.innerHTML = `const stats = player.getStats();\ndebug.log(stats.health);\nplayer.attack();`;
+    this.areaDOM.innerHTML = `const stats = player.getStats();
+console.log(stats.health);
+
+if (player.health <= player.maxHealth * 0.75) {
+  player.defend();
+}
+else {
+  player.attack();
+}`;
+    `const stats = player.getStats();\ndebug.log(stats.health);\nplayer.attack();`;
 
     this.fixTabs();
   }

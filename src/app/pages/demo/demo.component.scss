@@ -1,13 +1,9 @@
 .demo__content {
 
     margin-top: 1rem;
-    padding-bottom: 3rem;
+    padding-bottom: 2rem;
     position: relative;
     z-index: 1;
-
-    // -webkit-box-shadow: 0 0 1rem 0.5rem #00000020;
-    // -moz-box-shadow:    0 0 1rem 0.5rem #00000020;
-    // box-shadow:         0 0 1rem 0.5rem #00000020;
 
     .demo__content__title {
 
@@ -69,14 +65,22 @@
             }
         }
     }
+
+    .demo__content__description {
+        color: var(--col-grey-darker);
+        font-size: 1.2rem;
+        letter-spacing: 0.05;
+        padding: 0 1rem 1rem 1rem;
+    }
 }
 
 @media screen and (min-width: 640px) {
 
-    .demo__content, .demo__explaination {
+    .demo__content {
 
         margin-top: 0;
         padding-top: 2rem;
+        padding-bottom: 3rem;
 
         .demo__content__title,
         .demo__explaination__title,
@@ -92,6 +96,11 @@
                 margin: auto;
                 width: var(--size-page);
             }
+        }
+
+        .demo__content__description {
+            margin: auto;
+            width: var(--size-page);
         }
     }
 }

@@ -84,10 +84,11 @@ export class CharacterService {
                         case 'decide': {
 
                             const playerStats = turnData.value.getStats();
+                            this.attack();
 
-                            if (curStats.speed > playerStats.speed) { // If faster
+                            /*if (curStats.speed > playerStats.speed) { // If faster
 
-                                const midHealth = Math.round(curStats.maxHealth / 2);
+                                const midHealth = Math.round(curStats.maxHealth * 0.33);
                                 if (curStats.health > midHealth) { // If healthy, just attack
                                     this.attack();
                                 }
@@ -101,12 +102,19 @@ export class CharacterService {
                             else { // If slower, be more carefull
 
                                 if (playerStats.attack < curStats.health) { // If surviving, attack
-                                    this.attack();
+                                    const r = Math.random();
+
+                                    if (r < 0.5) {
+                                        this.attack();
+                                    }
+                                    else {
+                                        this.defend();
+                                    }
                                 }
                                 else {
                                     this.defend();
                                 }
-                            }
+                            }*/
                             resolve({
                                 type: 'damage',
                                 curMove: curMove,

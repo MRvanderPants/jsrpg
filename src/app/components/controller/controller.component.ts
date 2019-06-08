@@ -49,8 +49,8 @@ export class ControllerComponent implements OnInit {
    */
   public startGame (data: string, startLoop: boolean): void {
 
-    window['p'] =  CharacterService.generateCharacter('player', Helper.generateStats());
-    window['e'] =  CharacterService.generateCharacter('enemy', Helper.generateStats());
+    window['p'] =  CharacterService.generateCharacter('player', Helper.generateStats(false));
+    window['e'] =  CharacterService.generateCharacter('enemy', Helper.generateStats(true));
 
     if (!window['d']) {
       window['d'] =  Classes.generateDebugger(this);

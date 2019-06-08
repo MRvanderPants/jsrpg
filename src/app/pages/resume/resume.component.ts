@@ -9,8 +9,23 @@ import { Job } from '../../services/interface.service';
 export class ResumeComponent implements OnInit {
 
   public jobs: Array<Job>;
+  public projects: Array<any>;
 
   constructor() {
+
+    this.projects = [{
+      name: 'Switch Fitness app',
+      description: 'Fitness app in which Switch Fitness customers can book training sessions and keep track of their progress.',
+    }, {
+      name: 'Mijn Van Mossel app',
+      description: 'App for Van Mossel car-lease customers, in which vehicle and insurance can be found.',
+    }, {
+      name: 'Planon BIM Viewer',
+      description: 'A javascript based 3D model viewer specialised in visualising layered building information.',
+    }, {
+      name: 'Planon CAD Viewer',
+      description: 'A Javascript based 2D CAD drawing viewer used to display CAD drawings in SVG format.',
+    }];
 
     this.jobs = [{
       role: 'Javascript developer',

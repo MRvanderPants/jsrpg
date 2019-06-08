@@ -9,16 +9,19 @@ export class Helper {
 
     /**
      * Provide a stat-profile
+     * @param { boolean } isEnemy
      * @returns { CharacterStats }
      */
-    public static generateStats (): CharacterStats {
+    public static generateStats (isEnemy: boolean): CharacterStats {
 
         const r = Math.random();
+        const m = isEnemy ? -1 : 0;
+
         if (r < 0.33) {
             return { // Average
                 maxHealth: 6,
                 health: 6,
-                attack: 3,
+                attack: 3 + m,
                 defence: 1,
                 speed: 2
             };
@@ -27,7 +30,7 @@ export class Helper {
             return { // Defensive
                 maxHealth: 6,
                 health: 6,
-                attack: 3,
+                attack: 3 + m,
                 defence: 2,
                 speed: 1
             };
@@ -36,7 +39,7 @@ export class Helper {
             return { // Offensive
                 maxHealth: 5,
                 health: 5,
-                attack: 3,
+                attack: 3 + m,
                 defence: 1,
                 speed: 3
             };

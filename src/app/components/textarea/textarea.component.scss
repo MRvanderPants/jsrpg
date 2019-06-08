@@ -5,7 +5,6 @@
 .textarea__wrapper {
 
     background-color: var(--ion-white);
-    border-radius: 0.5rem;
     margin-bottom: -0.3rem;
     position: relative;
     width: calc(100% - 0.25rem);
@@ -17,7 +16,6 @@
     .textarea__wrapper__header {
 
         background-color: var(--col-grey);
-        border-radius: 0.5rem 0.5rem 0 0;
         display: flex;
         padding: 0 0.25rem;
         position: relative;
@@ -111,6 +109,17 @@
 
         .stop {
             display: block;
+        }
+    }
+}
+
+@media screen and (min-width: 640px) {
+
+    .textarea__wrapper {
+        border-radius: 0.5rem;
+
+        .textarea__wrapper__header {
+            border-radius: 0.5rem 0.5rem 0 0;
         }
     }
 }

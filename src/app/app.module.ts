@@ -25,6 +25,7 @@ import { DebugComponent } from './components/debug/debug.component';
 import { ControllerComponent } from './components/controller/controller.component';
 import { HealthbarComponent } from './components/healthbar/healthbar.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { LanguagesComponent } from './components/languages/languages.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { FooterComponent } from './components/footer/footer.component';
     ResumeComponent,
     ContactComponent,
     ErrorComponent,
-    FooterComponent
+    FooterComponent,
+    LanguagesComponent
   ],
   imports: [
     BrowserModule,
