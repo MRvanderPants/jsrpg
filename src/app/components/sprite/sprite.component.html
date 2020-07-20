@@ -1,9 +1,11 @@
 <div #sprite
     class="sprite"
-    [class.mirrored]="curAnimation.mirror">
-
+    [class.mirrored]="mirrored">
     <app-healthbar
         [character]="controller"
-        [isMirrored]="curAnimation.mirror">
+        [isMirrored]="mirrored">
     </app-healthbar>
+    <div class="winner" *ngIf="isWinner">
+        Winner!
+    </div>
 </div>

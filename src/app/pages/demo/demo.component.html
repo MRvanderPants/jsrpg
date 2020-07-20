@@ -8,7 +8,37 @@
     </h2>
 
     <div class="demo__content__description">
-        ... and I'm a Javascript developer and video game enthousiast from the Netherlands. The thing I love most about what I do is simply to make cool stuff. Whether it's a website, a game or some music, I'm at my happiest when I'm busy.
+        ... and I'm a Javascript developer and video game enthousiast from the Netherlands. I love to make cool stuff, whether it's a website, a game or a piece of music, I'm at my happiest when I'm busy.
+    </div>
+</section>
+
+
+<!-- Projects -->
+<section class="demo__content product__tray">
+
+    <h2 class="demo__content__title">
+        What I worked on
+    </h2>
+
+    <div
+        *ngFor="let project of projects; let i = index;"
+        class="product"
+        [class.odd]="i % 2 !== 0">
+
+        <img
+            [attr.src]="project.image"
+            class="product__try__image" />
+
+        <h3 class="product__title">
+            <span class="product__title__main">
+                {{ project.title }}    
+            </span>
+            <span
+                *ngIf="project.subtitle"
+                class="product__title__sub">
+                {{ project.subtitle }}  
+            </span>
+        </h3>
     </div>
 </section>
 
@@ -22,16 +52,5 @@
 
     <app-languages></app-languages>
 </section>
-
-
-<!-- Projects -->
-<!-- <section class="demo__content">
-    
-    <h2 class="demo__content__title">
-        Stuff I worked on
-    </h2>
-
-    
-</section> -->
 
 <app-footer></app-footer>

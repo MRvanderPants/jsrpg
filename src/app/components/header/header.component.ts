@@ -12,8 +12,6 @@ export class HeaderComponent implements OnInit {
   public routes: Array<Route>;
   public isOpen: boolean;
 
-  private timeout: any;
-
   constructor(
     private routingSerivce: RoutingService,
     private router: Router
@@ -36,7 +34,6 @@ export class HeaderComponent implements OnInit {
     });
     this.router.navigate([route.url]);
     this.isOpen = false;
-    clearTimeout(this.timeout);
   }
 
 
@@ -45,15 +42,5 @@ export class HeaderComponent implements OnInit {
    */
   public toggleNav () {
     this.isOpen = !this.isOpen;
-
-    if (this.isOpen) {
-
-      this.timeout = setTimeout(() => {
-
-        this.isOpen = false;
-        clearTimeout(this.timeout);
-        this.timeout = null;
-      }, 5000);
-    }
   }
 }

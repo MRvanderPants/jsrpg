@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ControllerComponent } from '../components/controller/controller.component';
-import { TurnData, CharacterStats } from './interface.service';
+import { TurnData, CharacterStats, Character as CharacterInterface } from './interface.service';
 
 @Injectable()
 export class CharacterService {
@@ -11,7 +11,7 @@ export class CharacterService {
     /**
      * Generates a closed character class-instance
      */
-    public static generateCharacter (identifier: string, profile: CharacterStats) {
+    public static generateCharacter (identifier: string, profile: CharacterStats): CharacterInterface {
 
         const Character = function (id: string, stats: CharacterStats) {
 

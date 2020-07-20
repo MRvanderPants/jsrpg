@@ -9,14 +9,16 @@
   <div class="game__wrapper">
 
     <app-sprite
-      [animation]="testPlayer"
+      [animation]="playerAnimation"
       [controller]="player"
+      [isWinner]="winner == 0"
       (animationEnd)="animationDidEnd('player')">
     </app-sprite>
     
     <app-sprite
-      [animation]="testEnemy"
+      [animation]="enemyAnimation"
       [controller]="enemy"
+      [isWinner]="winner == 1"
       (animationEnd)="animationDidEnd('enemy')">
     </app-sprite>
 

@@ -5,30 +5,11 @@
     (animationEnd)="continueFromAnimation($event)">
 </app-game>
 
-<!-- <div class="tabs">
-    <div class="tabs-wrapper">
-        <div
-            class="tabs-wrapper__item"
-            [class.active]="!openedTab && !largeScreen"
-            (click)="openedTab = false;">
-            Code
-        </div>
-
-        <div
-            class="tabs-wrapper__item"
-            [class.active]="openedTab && !largeScreen"
-            (click)="openedTab = true;">
-            Console
-        </div>
-    </div>
-    <div class="tabs-border"></div>
-</div> -->
-
 <section class="input-wrapper">
 
     <app-textarea
         [disabled]="disabled"
-        (execute)="startGame($event, true)"
+        (execute)="startGame($event)"
         (stop)="stopGame()"
         *ngIf="largeScreen || !openedTab">
     </app-textarea>

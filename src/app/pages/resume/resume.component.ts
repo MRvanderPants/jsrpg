@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Job } from '../../services/interface.service';
 
 @Component({
@@ -7,6 +7,8 @@ import { Job } from '../../services/interface.service';
   styleUrls: ['./resume.component.scss']
 })
 export class ResumeComponent implements OnInit {
+
+  @ViewChild('hero') private hero;
 
   public jobs: Array<Job>;
   public projects: Array<any>;
@@ -28,6 +30,13 @@ export class ResumeComponent implements OnInit {
     }];
 
     this.jobs = [{
+      role: 'Software developer',
+      skills: ['Angular', 'Typescript', 'RXJS', 'Jest', 'NodeJS'],
+      date_start: '2019',
+      date_end: '',
+      clients: ['the People Group'],
+      description: `Working as a all-round software engineer on a software package that generates complex underground networks, with a focus on implementing map and interface features.`
+    }, {
       role: 'Javascript developer',
       skills: ['Ionic', 'Angular', 'Typescript', 'Javascript', 'Vuejs', 'Nunjucks', 'Twig', 'Testcafe'],
       date_start: '2018',
@@ -66,6 +75,18 @@ export class ResumeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.paralax();
+    window.addEventListener('scroll', (event: any) => {
+      window.requestAnimationFrame(() => {
+        this.paralax();
+      });
+    });
   }
 
+  paralax() {
+    const margin = window.screen.width < 640 ? 160 : 0;
+    const heroHeight = this.hero.nativeElement.offsetHeight * 0.9;
+    const dist = - heroHeight + (window.scrollY * 0.5) + margin;
+    this.hero.nativeElement.style.backgroundPosition = `0 ${dist}px`;
+  }
 }

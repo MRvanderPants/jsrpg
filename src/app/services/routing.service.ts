@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { DOCUMENT } from '@angular/common';
 
 export interface Route {
   id: string;
@@ -12,9 +13,9 @@ export class RoutingService {
 
   private routes: Array<Route>;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, @Inject(DOCUMENT)private document: Document) {
 
-    const url = window.location.pathname;
+    const url = this.document.location.pathname;
 
     this.routes = [{
       id: 'work',

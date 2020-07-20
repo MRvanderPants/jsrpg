@@ -3,13 +3,70 @@
     display: block;
     height: 96px;
     width: 120px;
-}
 
-.mirrored {
-    -moz-transform: scaleX(-1);
-    -o-transform: scaleX(-1);
-    -webkit-transform: scaleX(-1);
-    transform: scaleX(-1);
-    filter: FlipH;
-    -ms-filter: "FlipH";
+    &.mirrored {
+        -moz-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        filter: FlipH;
+        -ms-filter: "FlipH";
+        width: 96px;
+
+        .winner {
+            -moz-transform: scaleX(-1);
+            -o-transform: scaleX(-1);
+            -webkit-transform: scaleX(-1);
+            transform: scaleX(-1);
+            filter: FlipH;
+            -ms-filter: "FlipH";
+        }
+    }
+
+    .winner {
+        background-color: var(--col-yellow);
+        border-radius: 0.25rem;
+        display: inline-block;
+        padding: 0.25rem 1rem;
+        position: relative;
+        text-align: center;
+        top: 5rem;
+        z-index: 1;
+
+        &::before {
+            background-color: var(--col-yellow-darker);
+            clip-path: polygon(
+                0 0,
+                1rem 0,
+                1rem 1rem,
+                0 1rem,
+                0.5rem 0.5rem
+            );
+            content: '';
+            height: 100%;
+            left: -1rem;
+            position: absolute;
+            top: 0.5rem;
+            width: calc(100% + 2rem);
+            z-index: -1;
+        }
+
+        &::after {
+            background-color: var(--col-yellow-darker);
+            clip-path: polygon(
+                calc(100% - 1rem) 0,
+                100% 0,
+                calc(100% - 0.5rem) 0.5rem,
+                100% 1rem,
+                calc(100% - 1rem) 1rem
+            );
+            content: '';
+            height: 100%;
+            right: -1rem;
+            position: absolute;
+            top: 0.5rem;
+            width: calc(100% + 2rem);
+            z-index: -1;
+        }
+    }
 }

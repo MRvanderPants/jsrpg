@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Classes } from '../../services/classes.service';
 import { CharacterService } from '../../services/character.service';
-import { CharacterStats } from '../../services/interface.service';
+import { CharacterStats, Character } from '../../services/interface.service';
 import { Helper } from '../../services/helper';
+import { animations } from '../../classes/animations';
 
 @Component({
   selector: 'app-controller',
@@ -13,11 +13,9 @@ export class ControllerComponent implements OnInit {
 
   @ViewChild('game') game: any;
 
-  public logs: any;
   public disabled: boolean;
-  public player: any;
-  public enemy: any;
-  public debug: any;
+  public player: Character;
+  public enemy: Character;
   public largeScreen: boolean;
   public openedTab: boolean;
 
@@ -28,7 +26,6 @@ export class ControllerComponent implements OnInit {
 
   constructor() {
 
-    this.logs = [];
     this.attackingCharacters = [];
     this.largeScreen = window.innerWidth >= 640;
     this.openedTab = false;
@@ -38,23 +35,19 @@ export class ControllerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.startGame('', false);
+    this.startGame('');
   }
 
 
   /**
    * Starts a new game
-   * @param { string } data
+   * @param { string } code
    * @param { boolean } startLoop
    */
-  public startGame (data: string, startLoop: boolean): void {
+  public startGame (code: string): void {
 
     window['p'] =  CharacterService.generateCharacter('player', Helper.generateStats(false));
     window['e'] =  CharacterService.generateCharacter('enemy', Helper.generateStats(true));
-
-    if (!window['d']) {
-      window['d'] =  Classes.generateDebugger(this);
-    }
 
     window['listeners'] = [{
       id: 'attack',
@@ -63,12 +56,11 @@ export class ControllerComponent implements OnInit {
 
     this.player = window['p'];
     this.enemy = window['e'];
-    this.debug = window['d'];
+    this.game.winner = -1;
 
     // Start the game loop
-    if (startLoop) {
-      this.debug.clear();
-      this.executeLoop(data);
+    if (code.length > 0) {
+      this.executeLoop(code);
     }
   }
 
@@ -88,14 +80,11 @@ export class ControllerComponent implements OnInit {
    */
   public continueFromAnimation(target: string): void {
 
-    const idleAnimation = {
-      url: '/assets/player/spr_fencer_idle_strip6.png',
-      width: 120,
-      speed: 160,
-      mirror: (target === 'player') ? false : true
-    };
+    const animation = (target === 'player')
+      ? animations.player.idle
+      : animations.slime.idle;
 
-    this.game.setAnimation(target, idleAnimation);
+    this.game.setAnimation(target, animation);
 
     if (this.animationCallback) {
       this.animationCallback();
@@ -105,48 +94,23 @@ export class ControllerComponent implements OnInit {
 
 
   /**
-   * Pushes a log to the debugger component
-   * @param { string } time
-   * @param { Array<string> } log
-   */
-  public pushLog (time: string, logs: Array<string>): void {
-
-    this.logs.push({
-      time: time,
-      logs: logs.join(', ')
-    });
-    this.logs = this.logs.slice();
-  }
-
-
-  /**
-   * Clears the log list
-   */
-  public clearLog (): void {
-    this.logs = [];
-  }
-
-
-  /**
    * Executes the JS code from the textarea
-   * @param { string } data
+   * @param { string } code
    */
-  public executeLoop (data: string): void {
+  public async executeLoop (code: string): Promise<void> {
 
     this.attackingCharacters = [];
 
     // Let the AI decide their turn
-    this.enemy._resolveTurn({
+    await this.enemy._resolveTurn({
       id: 'decide',
       value: this.player
-    }).then(() => {
-
-      this.executeScript(data);
-      this.disabled = true;
-
-      // Handle possible attacks this round
-      this.parseAttackingCharacters(data);
     });
+
+    // Handle possible attacks this round
+    this.executeScript(code);
+    this.disabled = true;
+    this.parseAttackingCharacters(code);
   }
 
 
@@ -168,16 +132,17 @@ export class ControllerComponent implements OnInit {
       this.executeLoop(data);
     }
     else {
-      this.debug.log('The game has ended');
       this.disabled = false;
 
       // Limit the health to zero is no more health
       if (playerDefeated) {
-        this.debug.log('The player was defeated');
+        this.game.winner = 1;
+        console.log('The player was defeated');
       }
 
       if (enemyDefeated) {
-        this.debug.log('The enemy was defeated');
+        this.game.winner = 0;
+        console.log('The enemy was defeated');
       }
     }
   }
@@ -187,7 +152,7 @@ export class ControllerComponent implements OnInit {
    * Look for attacking characters
    * @param { string } data
    */
-  private parseAttackingCharacters (data: string): void {
+  private parseAttackingCharacters (code: string): void {
 
     if (this.attackingCharacters.length > 0) {
 
@@ -203,46 +168,35 @@ export class ControllerComponent implements OnInit {
 
         // Check if the player has enough health to attack
         if (character.getStats().health <= 0) {
-          this.resolveTurn(data);
+          this.resolveTurn(code);
           return;
         }
 
-        this.debug.log(`${ character.id } attacked!`);
         this.attack(character).then(() => {
 
           index++;
-
           setTimeout(() => {
 
             if (index < this.attackingCharacters.length) {
               _attack(index);
             }
             else {
-              this.resolveTurn(data);
+              this.resolveTurn(code);
             }
-          }, 500);
+          }, 1500);
         });
       };
       _attack(0);
     }
 
-    // Display a blocking animation if needed
-    const blockingAnimation = {
-      url: '/assets/player/spr_fencer_parry_strip8.png',
-      width: 192,
-      speed: 10,
-      mirror: false
-    };
-
     // Decide blocking units
+    const blockingAnimation = animations.player.block;
     if (this.attackingCharacters.indexOf(this.player) === -1) {
-      this.debug.log(`player blocked!`);
       blockingAnimation.mirror = false;
       this.game.setAnimation('player', blockingAnimation);
     }
 
     if (this.attackingCharacters.indexOf(this.enemy) === -1) {
-      this.debug.log(`enemy blocked!`);
       blockingAnimation.mirror = true;
       this.game.setAnimation('enemy', blockingAnimation);
     }
@@ -250,9 +204,7 @@ export class ControllerComponent implements OnInit {
     // When both units block
     if (this.attackingCharacters.indexOf(this.player) === -1
     && this.attackingCharacters.indexOf(this.enemy) === -1) {
-
-        this.debug.log('Stalemate!');
-        // this.resolveTurn(data);
+        // this.resolveTurn(code);
     }
   }
 
@@ -270,16 +222,12 @@ export class ControllerComponent implements OnInit {
         ? this.enemy
         : this.player;
 
-      const mirrored = character.id === 'enemy';
+      const animation = (character.id === 'player')
+        ? animations.player.attack
+        : animations.slime.attack;
 
       // Set the attack animation
-      const attackAnimation = {
-        url: '/assets/player/spr_fencer_attack_strip9.png',
-        width: 192,
-        speed: 10,
-        mirror: mirrored
-      };
-      this.game.setAnimation(character.id, attackAnimation);
+      this.game.setAnimation(character.id, animation);
 
       this.animationCallback = () => {
 
@@ -291,20 +239,16 @@ export class ControllerComponent implements OnInit {
           // Display an hit animation if damaged
           if (response.type === 'damage' && response.curMove !== 'defend') {
 
-            const hitAnimation = {
-              url: '/assets/player/spr_fencer_hit_strip4.png',
-              width: 120,
-              speed: 10,
-              mirror: (character.id === 'player') ? true : false
-            };
-
             const other = (character.id === 'player')
               ? 'enemy'
               : 'player';
 
+            const hitAnimation = (other === 'player')
+              ? animations.player.hit
+              : animations.slime.hit;
+
             this.game.setAnimation(other, hitAnimation);
           }
-
           resolve();
         });
       };
@@ -315,14 +259,14 @@ export class ControllerComponent implements OnInit {
   /**
    * Executes a user script
    */
-  private executeScript (data: any): void {
+  private executeScript (code: string): void {
 
     // Execute the player defined script
     const newScript = document.createElement('script');
     newScript.innerHTML = `
-      function f (player, enemy, debug) {
+      function f (player, enemy) {
       var window = null, document = null;
-      ${ data }
+      ${ code }
       }; new f(window.p, window.e.getStats(), window.d);`;
     document.body.appendChild(newScript);
     newScript.parentNode.removeChild(newScript);

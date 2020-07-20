@@ -3,7 +3,8 @@
   <section class="language-wrapper">
 
     <div class="language" *ngFor="let language of languages">
-      <i class="language__icon {{ prefixIcon(language) }}"></i>
+      <i class="language__icon {{ language | prefixIcon }}"></i>
+      <span class="language__label">{{ language }}</span>
     </div>
 
   </section>

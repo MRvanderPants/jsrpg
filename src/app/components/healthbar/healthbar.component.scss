@@ -8,14 +8,10 @@
     top: -1rem;
     width: 5rem;
 
-    // -webkit-box-shadow: 0 0 1rem 0.25rem #00000030;
-    // -moz-box-shadow:    0 0 1rem 0.25rem #00000030;
-    // box-shadow:         0 0 1rem 0.25rem #00000030;
-
     .healthbar__fill {
-
         border-radius: 0.25rem;
         height: 100%;
+        transition: width 0.2s;
         width: calc(100% + 0.5rem);
     }
 }

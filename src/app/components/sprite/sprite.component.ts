@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
-import { SpriteAnimation } from '../../services/interface.service';
+import { SpriteAnimation } from '../../classes/SpriteAnimation';
+import { Character, SpriteAnimationProperties } from '../../services/interface.service';
+import { animations } from '../../classes/animations';
 
 @Component({
   selector: 'app-sprite',
@@ -10,30 +12,41 @@ export class SpriteComponent implements OnInit {
 
   @ViewChild('sprite') sprite;
 
-  @Input() set animation(anim: SpriteAnimation) {
-    this.curAnimation = anim;
-    this.adjustAnimation = true;
-  }
-
-  @Input() controller: any;
+  @Input() animation: SpriteAnimation;
+  @Input() controller: Character;
+  @Input() isWinner = false;
 
   @Output() animationEnd: EventEmitter<SpriteAnimation>;
 
   public spriteWidth: number;
   public spriteIndex: number;
-  public curAnimation: SpriteAnimation;
+  public animationProperties: SpriteAnimationProperties;
+  public mirrored: boolean;
 
-  private spriteDOM: any;
+  private spriteDOM: HTMLElement;
   private adjustAnimation: boolean;
+  private init: boolean;
 
   constructor() {
     this.animationEnd = new EventEmitter();
     this.adjustAnimation = false;
+    this.init = false;
+    this.mirrored = false;
   }
 
   ngOnInit() {
-    this.startAnimation();
-    window.setInterval(() => { this.animate(); }, this.curAnimation.speed);
+    this.animation.properties.subscribe((properties: SpriteAnimationProperties) => {
+      this.animationProperties = properties;
+      this.mirrored = this.animationProperties.mirror;
+
+      this.startAnimation();
+      if (!this.init) {
+        this.init = true;
+        window.setInterval(() => {
+          this.animate();
+        }, this.animationProperties.speed);
+      }
+    });
   }
 
 
@@ -41,10 +54,10 @@ export class SpriteComponent implements OnInit {
    * Stats a certain animation
    */
   private startAnimation (): void {
-
     this.spriteIndex = 0;
     this.spriteDOM = this.sprite.nativeElement;
-    this.spriteDOM.style.backgroundImage = `url('${this.curAnimation.url}')`;
+    this.spriteDOM.style.backgroundPosition = '0px';
+    this.spriteDOM.style.backgroundImage = `url('${this.animationProperties.url}')`;
     this.spriteWidth = this.findSpriteCount();
   }
 
@@ -54,12 +67,12 @@ export class SpriteComponent implements OnInit {
    */
   private animate (): void {
 
-    if(this.adjustAnimation) {
+    if (this.adjustAnimation) {
       this.startAnimation();
       this.adjustAnimation = false;
     }
 
-    const x = this.spriteIndex * this.curAnimation.width;
+    const x = this.spriteIndex * this.animationProperties.width;
     this.spriteDOM.style.backgroundPosition = `${x}px 0`;
     this.spriteIndex++;
 
@@ -67,11 +80,12 @@ export class SpriteComponent implements OnInit {
       this.spriteIndex = 0;
 
       const exceptions = [
-        '/assets/player/spr_fencer_idle_strip6.png'
+        animations.player.idle.url,
+        animations.slime.idle.url
       ];
 
-      if (exceptions.indexOf(this.curAnimation.url) === -1) {
-        this.animationEnd.emit(this.curAnimation);
+      if (exceptions.indexOf(this.animationProperties.url) === -1) {
+        this.animationEnd.emit(this.animation);
       }
     }
   }
@@ -82,8 +96,7 @@ export class SpriteComponent implements OnInit {
    * @returns { number }
    */
   private findSpriteCount (): number {
-
-    const strip = this.curAnimation.url.match(/strip[\d]/);
+    const strip = this.animationProperties.url.match(/strip[\d]/);
     const index = strip[0].match(/[\d]/)[0];
     return parseInt(index);
   }

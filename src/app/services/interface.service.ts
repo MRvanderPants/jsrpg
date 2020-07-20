@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-export interface SpriteAnimation {
+export interface SpriteAnimationProperties {
   url: string;
   width: number;
   speed: number;
@@ -27,6 +27,14 @@ export interface Job {
   date_end: string;
   clients: Array<string>;
   description: string;
+}
+
+export interface Character {
+  id: string;
+  getStats: () => CharacterStats;
+  attack: () => void;
+  defend: () => void;
+  _resolveTurn: (data: TurnData) => Promise<any>;
 }
 
 @Injectable()

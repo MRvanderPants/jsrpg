@@ -16,7 +16,6 @@
 
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     padding-bottom: 1rem;
 
     .language {
@@ -25,6 +24,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      width: 25%;
 
       .language__icon {
 
@@ -32,6 +32,14 @@
         display: block;
         font-size: 1.5rem;
         padding: 0.5rem 1.5rem;
+      }
+
+      .language__label {
+        color: var(--col-grey-60);
+        font-family: var(--font-title);
+        font-size: 0.9rem;
+        padding: 0.25rem 0 1rem 0;
+        text-transform: capitalize;
       }
     }
   }
@@ -50,6 +58,8 @@
     }
   
     .language-wrapper {
+
+      width: 100%;
   
       .language {
   

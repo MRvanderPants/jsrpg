@@ -1,17 +1,95 @@
 .footer {
 
     background-color: var(--col-grey-lighter);
-    padding: 0.5rem 1rem;
+    padding-top: 1.5rem;
     position: relative;
-    width: calc(100% - 2rem);
+    width: 100%;
     z-index: 1;
 
+    .footer__nav__title {
+        color: var(--col-grey-medium);
+        font-family: var(--font-title);
+        font-weight: normal;
+        letter-spacing: 0.05rem;
+        margin: 0 auto 1.5rem auto;
+        padding: 0 1.5rem;
+        position: relative;
+
+        &:after {
+            background-color: var(--col-blue);
+            bottom: -1rem;
+            content: '';
+            display: block;
+            height: 0.25rem;
+            position: absolute;
+            width: 2.5rem;
+        }
+
+        .footer__nav__title__icon {
+            height: 1rem;
+            opacity: 0.6;
+            margin-right: 0.25rem;
+        }
+    }
+
+    .footer__wrapper {
+        display: flex;
+        margin: auto;
+        width: 100%;
+
+        .footer__nav {
+            display: flex;
+            flex-direction: column;
+            padding: 0.5rem 0 2rem 3rem;
+            width: 25%;
+
+            .footer__nav__item__title {
+                color: var(--col-grey-medium);
+                font-family: var(--font-title);
+                font-size: 0.8rem;
+                font-weight: normal;
+                padding-bottom: 0.25rem;
+            }
+
+            .footer__nav__item {
+                color: var(--col-black);
+                font-size: 0.9rem;
+                opacity: 1;
+                margin-left: 1rem;
+                transition: padding 0.33s ease-out;
+
+                &:hover {
+                    opacity: 1;
+                    padding-left: 0.5rem;
+                }
+            }
+        }
+    }
+
     .footer__title {
+        background-color: var(--col-grey);
         color: var(--col-grey-medium);
         display: block;
         font-family: var(--font-title), sans-serif;
         font-size: 0.9rem;
+        padding: 0.5rem 0;
         text-align: center;
         width: 100%;
+    }
+}
+
+@media screen and (min-width: 640px) {
+
+    .footer__nav__title {
+        padding: 0;
+        width: var(--size-page);
+    }
+
+    .footer__nav {
+        padding: 0.5rem 0 2rem 3rem;
+    }
+
+    .footer__wrapper {
+        width: var(--size-page) !important;
     }
 }

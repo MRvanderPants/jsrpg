@@ -1,22 +1,20 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
+import { Character } from '../../services/interface.service';
 
 @Component({
   selector: 'app-healthbar',
   templateUrl: './healthbar.component.html',
   styleUrls: ['./healthbar.component.scss']
 })
-export class HealthbarComponent implements OnInit {
+export class HealthbarComponent {
 
   @ViewChild('container') container;
   @ViewChild('fill') fill;
 
-  @Input() character: any;
+  @Input() character: Character;
   @Input() isMirrored: boolean;
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
 
   /**

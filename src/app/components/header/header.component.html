@@ -13,7 +13,9 @@
   </div>
 </div>
 
-<div class="header__nav" [class.opened]="isOpen">
+<div class="header__nav">
+
+  <div class="header__nav__underlay" [class.visible]="isOpen"></div>
 
   <div class="header__nav__button" (click)="toggleNav()">
     <i class="header__nav__button__icon material-icons">
@@ -21,7 +23,9 @@
     </i>
   </div>
 
-  <div class="header__nav__wrapper" *ngIf="isOpen">
+  <div class="header__nav__wrapper"
+    [class.isOpen]="isOpen"
+    [class.isClosed]="!isOpen">
     <div
       class="header__nav__item"
       *ngFor="let route of routes"
@@ -33,5 +37,4 @@
       </span>
     </div>
   </div>
-
 </div>

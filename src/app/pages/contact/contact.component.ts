@@ -27,6 +27,7 @@ export class ContactComponent implements OnInit {
       check1: new FormControl(''),
       check2: new FormControl('', [Validators.required, Validators.minLength(3)]),
     });
+    console.log(this.contactForm.controls);
   }
 
   ngOnInit() {

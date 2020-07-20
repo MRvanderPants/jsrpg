@@ -86,29 +86,30 @@
         .stop {
             display: none;
         }
-    }
 
-    .textarea__submit:hover {
-        
-        background-color: var(--col-blue-darker);
-        cursor: pointer;
+        &:hover {
+            background-color: var(--col-blue-darker);
+            cursor: pointer;
+            transform: scale(1.1);
+        }
     }
 
     .disabled {
         background-color: var(--col-grey-darker);
         color: var(--col-grey-lightest);
-    }
+        transform: scale(1) !important;
 
-    .disabled:hover {
-        background-color: var(--col-danger);
-        color: var(--col-grey-lightest);
-
-        .textarea__submit__icon--animating {
-            display: none !important;
-        }
-
-        .stop {
-            display: block;
+        &:hover {
+            background-color: var(--col-danger);
+            color: var(--col-grey-lightest);
+    
+            .textarea__submit__icon--animating {
+                display: none !important;
+            }
+    
+            .stop {
+                display: block;
+            }
         }
     }
 }
